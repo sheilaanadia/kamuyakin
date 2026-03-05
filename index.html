@@ -2,1053 +2,873 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Kamu Yakin? — Mitos vs Fakta</title>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kamu Yakin?</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #f2f6f2;
-  --surface: #ffffff;
-  --surface2: #e6ede6;
-  --card: #ffffff;
-  --accent: #3d9970;
-  --accent-light: rgba(61,153,112,0.1);
-  --accent2: #f4a261;
-  --accent3: #e76f51;
-  --text: #1a2e1a;
-  --text-soft: #4a6641;
-  --text-muted: #7a9b7a;
-  --border: #c8dcc8;
-  --shadow: rgba(61,153,112,0.10);
-  --correct: #2ecc71;
-  --wrong: #e74c3c;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --nav-h: 58px;
-  --top-nav-h: 52px;
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0f0f13;
+  --bg2:#16161d;
+  --bg3:#1e1e28;
+  --card:#1a1a24;
+  --card2:#222230;
+  --border:#2a2a3a;
+  --border2:#333345;
+  --accent:#e8c84a;
+  --accent2:#d4a820;
+  --accentbg:rgba(232,200,74,0.12);
+  --accentbg2:rgba(232,200,74,0.07);
+  --green:#22c55e;
+  --red:#ef4444;
+  --blue:#60a5fa;
+  --text:#f0f0f5;
+  --text2:#a0a0b8;
+  --text3:#606078;
+  --radius:14px;
+  --radius-sm:9px;
+  --shadow:0 4px 24px rgba(0,0,0,0.4);
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Nunito',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
-body::before { content:''; position:fixed; inset:0; background: radial-gradient(ellipse at 15% 10%, rgba(61,153,112,0.07) 0%,transparent 55%), radial-gradient(ellipse at 85% 90%, rgba(244,162,97,0.06) 0%,transparent 55%); pointer-events:none; z-index:0; }
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(245,197,24,0.05) 0%,transparent 50%),radial-gradient(ellipse at 80% 100%,rgba(96,165,250,0.04) 0%,transparent 50%);pointer-events:none;z-index:0}
 
-/* ===================== TOP FEATURE NAV ===================== */
-.top-feature-nav {
-  position: sticky; top: 0; z-index: 200;
-  background: rgba(255,255,255,0.96);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center;
-  padding: 0 20px;
-  height: var(--top-nav-h);
-  gap: 4px;
-  overflow-x: auto;
-  scrollbar-width: none;
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(15,15,19,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;height:56px;gap:2px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-brand{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0;margin-right:8px}
+.nav-brand img{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);box-shadow:0 0 10px rgba(245,200,80,0.2)}
+.nav-brand-name{font-size:.9rem;font-weight:800;color:var(--accent);white-space:nowrap}
+.nav-sep{width:1px;height:18px;background:var(--border);margin:0 6px;flex-shrink:0}
+.nb{display:flex;align-items:center;gap:5px;padding:6px 13px;border-radius:50px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:700;transition:all .2s;white-space:nowrap;flex-shrink:0;background:transparent;color:var(--text2)}
+.nb:hover{background:var(--bg3);color:var(--text)}
+.nb.active{background:var(--accentbg);color:var(--accent);border:1px solid rgba(245,197,24,0.2)}
+.nav-yt{margin-left:auto;flex-shrink:0;background:#ff0000;color:white;padding:7px 14px;border-radius:50px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:.77rem;font-weight:800;text-decoration:none;display:flex;align-items:center;gap:5px;transition:all .2s;white-space:nowrap}
+.nav-yt:hover{background:#cc0000;transform:scale(1.03)}
+.admin-badge{display:none;align-items:center;gap:6px;padding:5px 12px;border-radius:50px;background:rgba(34,197,94,0.12);color:var(--green);font-size:.72rem;font-weight:700;border:1px solid rgba(34,197,94,0.2);flex-shrink:0}
+body.admin-mode .admin-badge{display:flex}
+body.admin-mode .lock-btn{display:none}
+.lock-btn{background:transparent;border:1px solid var(--border);border-radius:50px;padding:6px 11px;cursor:pointer;font-size:.8rem;flex-shrink:0;transition:all .2s;color:var(--text2)}
+.lock-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* PAGES */
+.page{display:none;animation:fadeUp .3s ease;position:relative;z-index:1}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 60px}
+
+/* SECTION HEADER */
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.sec-title{font-size:1.1rem;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px}
+.sec-badge{font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:50px;background:var(--accentbg);color:var(--accent);border:1px solid rgba(245,197,24,0.15)}
+
+/* HOME HERO */
+.hero{text-align:center;padding:52px 20px 40px;max-width:640px;margin:0 auto}
+.hero-logo{width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--accent);box-shadow:0 0 30px rgba(245,200,80,0.25),0 8px 32px rgba(0,0,0,0.5);margin:0 auto 22px;display:block;transition:transform .3s,box-shadow .3s}
+.hero-logo:hover{transform:scale(1.06);box-shadow:0 0 40px rgba(232,200,74,0.35),0 8px 32px rgba(0,0,0,0.5)}
+.hero-pill{display:inline-flex;align-items:center;gap:6px;background:var(--accentbg);border:1px solid rgba(232,200,74,0.25);padding:5px 14px;border-radius:50px;font-size:.72rem;font-weight:700;color:var(--accent);margin-bottom:18px;letter-spacing:.03em}
+.hero h1{font-size:clamp(2rem,5.5vw,3rem);font-weight:800;line-height:1.2;margin-bottom:14px;color:var(--text)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{font-size:.95rem;color:var(--text2);line-height:1.8;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto}
+.hero-btns{display:flex;gap:11px;justify-content:center;flex-wrap:wrap}
+.btn{padding:12px 24px;border-radius:50px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;font-weight:800;transition:all .2s;display:inline-flex;align-items:center;gap:7px;text-decoration:none}
+.btn-primary{background:var(--accent);color:#1a1a0a;box-shadow:0 4px 20px rgba(232,200,74,0.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,200,74,0.25)}
+.btn-ghost{background:var(--card);color:var(--text);border:1px solid var(--border2)}
+.btn-ghost:hover{background:var(--card2);transform:translateY(-2px)}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+@media(max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center}
+.stat-n{font-size:1.7rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+.stat-l{font-size:.68rem;color:var(--text3);font-weight:600;margin-top:3px;text-transform:uppercase;letter-spacing:.05em}
+
+/* FACT CARD */
+.fact-card{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);padding:20px;margin-bottom:24px}
+.fact-tag{font-size:.65rem;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.fact-txt{font-size:.93rem;line-height:1.75;color:var(--text2);font-weight:500}
+.yt-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:#ff0000;color:white;padding:7px 14px;border-radius:8px;font-size:.76rem;font-weight:800;text-decoration:none;transition:all .2s}
+.yt-btn:hover{background:#cc0000;transform:translateY(-1px)}
+
+/* ARTIKEL */
+.art-grid{display:grid;gap:14px}
+.art-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all .25s;cursor:default;position:relative;overflow:hidden}
+.art-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);border-radius:3px 0 0 3px;opacity:0;transition:opacity .2s}
+.art-card:hover{border-color:var(--border2);background:var(--card2);transform:translateY(-2px)}
+.art-card:hover::before{opacity:1}
+.art-meta{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.art-tag{padding:3px 10px;border-radius:50px;font-size:.65rem;font-weight:800;background:var(--accentbg);color:var(--accent);border:1px solid rgba(245,197,24,0.15)}
+.art-date{font-size:.67rem;color:var(--text3);font-weight:600}
+.art-title{font-size:1rem;font-weight:700;line-height:1.45;margin-bottom:8px;color:var(--text)}
+.art-excerpt{font-size:.83rem;color:var(--text2);line-height:1.7}
+.art-footer{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.art-link{font-size:.77rem;font-weight:700;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:4px;transition:gap .2s}
+.art-link:hover{gap:7px}
+
+/* QUIZ */
+.quiz-grid{display:grid;gap:11px}
+.qt-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s}
+.qt-card:hover{border-color:var(--accent);background:var(--accentbg2);transform:translateX(4px)}
+.qt-icon{font-size:1.8rem;flex-shrink:0;width:44px;height:44px;background:var(--bg3);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.qt-info{flex:1}
+.qt-name{font-weight:800;font-size:.92rem;margin-bottom:3px}
+.qt-count{font-size:.72rem;color:var(--text3);font-weight:600}
+.qt-arr{color:var(--text3);font-size:1.1rem;transition:transform .2s}
+.qt-card:hover .qt-arr{transform:translateX(4px);color:var(--accent)}
+
+/* QUIZ PLAY */
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;box-shadow:var(--shadow)}
+.q-prog{height:4px;background:var(--bg3);border-radius:2px;margin-bottom:24px;overflow:hidden}
+.q-prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .4s ease}
+.q-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.q-num{font-size:.75rem;font-weight:700;color:var(--text3)}
+.q-pts{background:var(--accentbg);padding:5px 12px;border-radius:50px;font-size:.75rem;font-weight:800;color:var(--accent)}
+.q-topic{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:50px;background:var(--bg3);color:var(--text2);font-size:.72rem;font-weight:700;margin-bottom:14px;border:1px solid var(--border)}
+.q-question{font-size:1.15rem;font-weight:700;line-height:1.5;margin-bottom:20px;color:var(--text)}
+.q-opts{display:grid;gap:9px}
+.q-opt{background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;padding:13px 16px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;font-weight:600;text-align:left;width:100%;transition:all .2s;color:var(--text);display:flex;align-items:center;gap:11px}
+.q-opt:hover:not(:disabled){background:var(--accentbg2);border-color:rgba(245,197,24,0.3);transform:translateX(3px)}
+.q-opt.correct{background:rgba(34,197,94,0.1);border-color:var(--green);color:#86efac}
+.q-opt.wrong{background:rgba(239,68,68,0.1);border-color:var(--red);color:#fca5a5}
+.q-opt:disabled{cursor:default}
+.opt-lbl{width:27px;height:27px;border-radius:7px;background:var(--border);color:var(--text2);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0;transition:all .2s}
+.q-opt.correct .opt-lbl{background:var(--green);color:#0f0f13}
+.q-opt.wrong .opt-lbl{background:var(--red);color:white}
+.q-exp{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:14px;margin-top:14px;font-size:.82rem;line-height:1.7;color:var(--text2);display:none}
+.q-exp.show{display:block;animation:fadeUp .3s}
+.q-next{width:100%;padding:13px;background:var(--accent);color:#0f0f13;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.92rem;font-weight:800;cursor:pointer;transition:all .2s;margin-top:10px;display:none}
+.q-next.show{display:block}
+.q-next:hover{background:var(--accent2)}
+/* result */
+.result-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px 28px;text-align:center;box-shadow:var(--shadow)}
+.res-emoji{font-size:3.5rem;display:block;margin-bottom:14px}
+.res-score{font-size:3rem;font-weight:800;color:var(--accent)}
+.res-lbl{font-size:1.05rem;font-weight:700;margin:6px 0;color:var(--text)}
+.res-msg{font-size:.86rem;color:var(--text2);line-height:1.7;margin-bottom:24px}
+
+/* KOMUNITAS */
+.lb-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:20px}
+.lb-head{background:linear-gradient(135deg,var(--accentbg),var(--bg3));padding:14px 18px;font-weight:800;font-size:.9rem;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.lb-row{display:flex;align-items:center;gap:12px;padding:13px 18px;border-bottom:1px solid var(--border);transition:background .15s}
+.lb-row:last-child{border-bottom:none}
+.lb-row:hover{background:var(--bg3)}
+.lb-rank{font-size:.95rem;font-weight:800;width:26px;text-align:center;color:var(--text3)}
+.lb-rank.gold{color:#f5c518}.lb-rank.silver{color:#94a3b8}.lb-rank.bronze{color:#cd7c2f}
+.lb-av{width:34px;height:34px;border-radius:50%;background:var(--bg3);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.lb-name{flex:1;font-weight:700;font-size:.87rem}
+.lb-pts{font-weight:800;font-size:.88rem;color:var(--accent)}
+.comm-card{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:var(--radius);padding:20px}
+.comm-title{font-weight:800;font-size:.93rem;margin-bottom:7px;color:var(--text)}
+.comm-txt{font-size:.83rem;color:var(--text2);line-height:1.7}
+
+/* COVER YT */
+.yt-cover{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:20px}
+.yt-banner{background:linear-gradient(135deg,#1a0a00,#2d1500,#1a0000);height:140px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.yt-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,0,0,0.12) 0%,transparent 70%)}
+.yt-banner-logo{width:64px;height:64px;border-radius:50%;object-fit:cover;border:3px solid #ff0000;box-shadow:0 0 24px rgba(255,0,0,0.3);position:relative;z-index:1;display:block;margin:0 auto}
+.yt-info{padding:18px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.yt-channel-name{font-weight:800;font-size:1.05rem;margin-bottom:4px}
+.yt-sub{font-size:.78rem;color:var(--text3);font-weight:600}
+.yt-subscribe{background:#ff0000;color:white;border:none;border-radius:50px;padding:10px 22px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.83rem;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:all .2s}
+.yt-subscribe:hover{background:#cc0000;transform:scale(1.03)}
+.yt-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.yt-stat{background:var(--card);padding:14px;text-align:center}
+.yt-stat-n{font-weight:800;font-size:1.1rem;color:var(--text)}
+.yt-stat-l{font-size:.67rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+
+/* KONTAK */
+.social-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:11px;margin-bottom:20px}
+.sc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 14px;text-align:center;text-decoration:none;transition:all .2s;position:relative;overflow:hidden}
+.sc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--sc-color,var(--accent));transform:scaleX(0);transition:transform .2s}
+.sc-card:hover{background:var(--card2);transform:translateY(-3px);border-color:var(--border2)}
+.sc-card:hover::after{transform:scaleX(1)}
+.sc-icon{font-size:1.9rem;margin-bottom:9px;display:block}
+.sc-name{font-weight:800;font-size:.82rem;color:var(--text);margin-bottom:3px}
+.sc-handle{font-size:.71rem;color:var(--text3);font-weight:600}
+.contact-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.contact-title{font-weight:800;font-size:1rem;margin-bottom:18px;color:var(--text)}
+.email-row{display:flex;align-items:center;gap:13px;padding:14px 16px;background:var(--bg3);border-radius:var(--radius-sm);margin-bottom:18px;border:1px solid var(--border)}
+.email-icon{font-size:1.5rem}
+.email-lbl{font-size:.65rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.email-val{font-size:.9rem;font-weight:700;color:var(--accent)}
+.form-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:500px){.form-2col{grid-template-columns:1fr}}
+.cf-grp{margin-bottom:13px}
+.cf-lbl{font-size:.7rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;display:block}
+.cf-inp,.cf-ta{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Plus Jakarta Sans',sans-serif;font-size:.87rem;font-weight:500;color:var(--text);background:var(--bg3);outline:none;transition:border .2s}
+.cf-inp:focus,.cf-ta:focus{border-color:var(--accent);background:var(--bg2)}
+.cf-ta{resize:vertical;min-height:95px}
+.cf-send{background:var(--accent);color:#1a1a0a;border:none;border-radius:50px;padding:12px 26px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;font-weight:800;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.cf-send:hover{background:var(--accent2);transform:translateY(-1px)}
+.cf-ok{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:var(--radius-sm);padding:12px 16px;font-size:.83rem;font-weight:700;color:#86efac;display:none;align-items:center;gap:8px;margin-top:12px}
+.cf-ok.show{display:flex;animation:fadeUp .3s}
+
+/* EDIT */
+.edit-btn{display:none;align-items:center;gap:4px;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:transparent;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:.7rem;font-weight:700;color:var(--text3);transition:all .2s}
+body.admin-mode .edit-btn{display:inline-flex}
+.edit-btn:hover{border-color:var(--accent);color:var(--accent)}
+.edit-btn.del:hover{border-color:var(--red);color:var(--red)}
+
+/* EDIT PANEL */
+.ep{position:fixed;inset:0;z-index:900;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;opacity:0;transition:opacity .25s}
+.ep.open{pointer-events:all;opacity:1}
+.ep-bg{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
+.ep-sheet{position:relative;z-index:1;background:var(--bg2);border:1px solid var(--border);border-bottom:none;border-radius:20px 20px 0 0;width:100%;max-width:640px;max-height:88vh;overflow-y:auto;padding:0 0 28px;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1);box-shadow:0 -8px 40px rgba(0,0,0,.5)}
+.ep.open .ep-sheet{transform:translateY(0)}
+.ep-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:13px auto 0}
+.ep-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--border)}
+.ep-title{font-size:1rem;font-weight:800}
+.ep-x{background:var(--bg3);border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all .2s}
+.ep-x:hover{background:var(--border);color:var(--text)}
+.ep-body{padding:18px 22px}
+.f-grp{margin-bottom:15px}
+.f-lbl{font-size:.7rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;display:block}
+.f-inp,.f-ta{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'Plus Jakarta Sans',sans-serif;font-size:.87rem;font-weight:500;color:var(--text);background:var(--bg3);outline:none;transition:border .2s}
+.f-inp:focus,.f-ta:focus{border-color:var(--accent);background:var(--bg)}
+.f-ta{resize:vertical;min-height:80px}
+.f-2col{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.ep-actions{display:flex;gap:9px;margin-top:16px}
+.ep-save{background:var(--accent);color:#1a1a0a;border:none;border-radius:50px;padding:11px 22px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.87rem;font-weight:800;cursor:pointer;flex:1;transition:all .2s}
+.ep-save:hover{background:var(--accent2)}
+.ep-cancel{background:var(--bg3);color:var(--text2);border:none;border-radius:50px;padding:11px 18px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.87rem;font-weight:700;cursor:pointer;transition:all .2s}
+.ep-cancel:hover{background:var(--border)}
+.ep-item{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid var(--border)}
+.ep-item:last-child{border-bottom:none}
+.divider{height:1px;background:var(--border);margin:18px 0}
+.ep-sub{font-size:.82rem;font-weight:800;color:var(--text2);margin-bottom:12px}
+
+/* PASSWORD */
+.pw-modal{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.pw-modal.open{opacity:1;pointer-events:all}
+.pw-box{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:32px 28px;width:100%;max-width:320px;box-shadow:var(--shadow);text-align:center;transform:scale(0.95) translateY(10px);transition:transform .25s}
+.pw-modal.open .pw-box{transform:scale(1) translateY(0)}
+.pw-icon{font-size:2rem;margin-bottom:10px;display:block}
+.pw-title{font-size:1.1rem;font-weight:800;margin-bottom:5px}
+.pw-sub{font-size:.78rem;color:var(--text3);font-weight:500;margin-bottom:18px}
+.pw-inp{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;text-align:center;letter-spacing:.15em;outline:none;transition:border .2s;background:var(--bg3);color:var(--text)}
+.pw-inp:focus{border-color:var(--accent)}
+.pw-inp.shake{animation:shake .4s;border-color:var(--red)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.pw-err{font-size:.74rem;color:var(--red);font-weight:600;margin-top:7px;min-height:16px}
+.pw-acts{display:flex;gap:9px;margin-top:14px}
+.pw-ok{flex:1;background:var(--accent);color:#1a1a0a;border:none;border-radius:50px;padding:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;font-weight:800;cursor:pointer;transition:all .2s}
+.pw-ok:hover{background:var(--accent2)}
+.pw-no{background:var(--bg3);color:var(--text2);border:none;border-radius:50px;padding:11px 16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s}
+.pw-no:hover{background:var(--border)}
+
+/* MISC */
+
+/* LIGHT MODE */
+body.light {
+  --bg:#f5f5f8;
+  --bg2:#ffffff;
+  --bg3:#eeeef3;
+  --card:#ffffff;
+  --card2:#f0f0f5;
+  --border:#e0e0ea;
+  --border2:#cecedd;
+  --accent:#b58a00;
+  --accent2:#9a7200;
+  --accentbg:rgba(181,138,0,0.1);
+  --accentbg2:rgba(181,138,0,0.06);
+  --green:#16a34a;
+  --red:#dc2626;
+  --blue:#2563eb;
+  --text:#1a1a2e;
+  --text2:#4a4a6a;
+  --text3:#9090aa;
+  --shadow:0 4px 24px rgba(0,0,0,0.08);
 }
-.top-feature-nav::-webkit-scrollbar { display:none; }
-.tfn-logo {
-  font-family:'Baloo 2',sans-serif; font-size:1.1rem; font-weight:800;
-  color:var(--accent); white-space:nowrap; margin-right:12px;
-  display:flex; align-items:center; gap:6px; flex-shrink:0;
+body.light {background:var(--bg)}
+body.light .nav{background:rgba(245,245,248,0.94)}
+body.light .pw-inp{color:var(--text);background:var(--bg3)}
+body.light .f-inp,body.light .f-ta{color:var(--text);background:var(--bg3)}
+body.light .cf-inp,body.light .cf-ta{color:var(--text);background:var(--bg3)}
+
+/* TOGGLE BUTTON */
+.mode-toggle{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:50px;padding:6px 12px;cursor:pointer;
+  font-size:.78rem;font-weight:700;color:var(--text2);
+  display:flex;align-items:center;gap:5px;
+  transition:all .2s;flex-shrink:0;
+  font-family:'Plus Jakarta Sans',sans-serif;
 }
-.tfn-logo-icon { width:28px;height:28px; background:var(--accent); border-radius:8px; display:flex;align-items:center;justify-content:center; font-size:.9rem; }
-.tfn-divider { width:1px; height:22px; background:var(--border); margin:0 6px; flex-shrink:0; }
-.tfn-btn {
-  display:flex; align-items:center; gap:6px;
-  padding:7px 14px; border-radius:50px; border:none; cursor:pointer;
-  font-family:'Nunito',sans-serif; font-size:.82rem; font-weight:700;
-  transition:all .2s; white-space:nowrap; flex-shrink:0;
-  background:transparent; color:var(--text-soft);
-}
-.tfn-btn:hover { background:var(--surface2); }
-.tfn-btn.active { background:var(--accent); color:white; }
-.tfn-btn .tfn-icon { font-size:.95rem; }
-.tfn-yt {
-  margin-left:auto; flex-shrink:0;
-  background:#ff0000; color:white;
-  padding:7px 14px; border-radius:50px; border:none; cursor:pointer;
-  font-family:'Nunito',sans-serif; font-size:.8rem; font-weight:800;
-  text-decoration:none; display:flex;align-items:center;gap:5px;
-  transition:all .2s;
-}
-.tfn-yt:hover { background:#cc0000; transform:translateY(-1px); }
-
-/* ===================== PAGES ===================== */
-.page { display:none; animation:fadeUp .35s ease; }
-.page.active { display:block; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-
-/* ===================== SHARED LAYOUT ===================== */
-.wrap { max-width:740px; margin:0 auto; padding:28px 20px 90px; position:relative; z-index:1; }
-.section-hd { display:flex;align-items:center;justify-content:space-between; margin-bottom:18px; }
-.section-title { font-family:'Baloo 2',sans-serif; font-size:1.2rem; font-weight:800; color:var(--text); display:flex;align-items:center;gap:8px; }
-.badge { display:inline-block; padding:4px 10px; border-radius:50px; font-size:.72rem; font-weight:800; background:var(--surface2); color:var(--text-soft); }
-.badge.green { background:var(--accent-light); color:var(--accent); }
-
-/* ===================== HERO (HOME) ===================== */
-.hero { text-align:center; padding:40px 20px 32px; max-width:620px; margin:0 auto; position:relative; z-index:1; }
-.hero-badge { display:inline-flex;align-items:center;gap:6px; background:var(--surface2); border:1px solid var(--border); padding:5px 13px; border-radius:50px; font-size:.78rem; font-weight:700; color:var(--text-soft); margin-bottom:20px; }
-.hero h1 { font-family:'Baloo 2',sans-serif; font-size:clamp(2rem,6vw,3rem); font-weight:800; line-height:1.2; margin-bottom:14px; }
-.hero h1 span { color:var(--accent); }
-.hero p { font-size:.95rem; color:var(--text-soft); line-height:1.75; margin-bottom:26px; }
-.btn-row { display:flex;gap:10px;justify-content:center;flex-wrap:wrap; }
-.btn { padding:12px 24px; border-radius:50px; border:none; cursor:pointer; font-family:'Nunito',sans-serif; font-size:.92rem; font-weight:800; transition:all .2s; display:inline-flex;align-items:center;gap:7px; text-decoration:none; }
-.btn.green { background:var(--accent); color:white; box-shadow:0 4px 14px rgba(61,153,112,.28); }
-.btn.green:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(61,153,112,.38); }
-.btn.outline { background:transparent; color:var(--text); border:2px solid var(--border); }
-.btn.outline:hover { background:var(--surface); transform:translateY(-2px); }
-.stats-row { display:flex;gap:12px;flex-wrap:wrap; margin-bottom:28px; }
-.stat-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px; flex:1; min-width:100px; text-align:center; box-shadow:0 2px 8px var(--shadow); }
-.stat-n { font-family:'Baloo 2',sans-serif; font-size:1.65rem; font-weight:800; color:var(--accent); }
-.stat-l { font-size:.72rem; color:var(--text-muted); font-weight:700; margin-top:2px; }
-
-/* ===================== EDIT PANEL ===================== */
-.edit-panel {
-  position:fixed; inset:0; z-index:900;
-  display:flex; align-items:flex-end; justify-content:center;
-  pointer-events:none; opacity:0; transition:opacity .3s;
-}
-.edit-panel.open { pointer-events:all; opacity:1; }
-.edit-overlay { position:absolute;inset:0; background:rgba(0,0,0,.35); backdrop-filter:blur(3px); }
-.edit-sheet {
-  position:relative; z-index:1;
-  background:var(--card); border-radius:24px 24px 0 0;
-  width:100%; max-width:680px;
-  max-height:88vh; overflow-y:auto;
-  padding:0 0 32px;
-  transform:translateY(100%); transition:transform .35s cubic-bezier(.32,.72,0,1);
-  box-shadow:0 -8px 40px rgba(0,0,0,.15);
-}
-.edit-panel.open .edit-sheet { transform:translateY(0); }
-.edit-sheet-handle { width:40px;height:4px; background:var(--border); border-radius:2px; margin:14px auto 0; }
-.edit-sheet-header { display:flex;align-items:center;justify-content:space-between; padding:16px 24px; border-bottom:1px solid var(--border); }
-.edit-sheet-title { font-family:'Baloo 2',sans-serif; font-size:1.1rem; font-weight:800; }
-.edit-close { background:var(--surface2); border:none; border-radius:50%; width:32px;height:32px; cursor:pointer; font-size:1rem; display:flex;align-items:center;justify-content:center; transition:all .2s; }
-.edit-close:hover { background:var(--border); }
-.edit-body { padding:20px 24px; }
-.field-group { margin-bottom:18px; }
-.field-label { font-size:.8rem; font-weight:800; color:var(--text-soft); margin-bottom:6px; display:block; text-transform:uppercase; letter-spacing:.04em; }
-.field-input, .field-textarea, .field-select {
-  width:100%; padding:11px 14px; border:2px solid var(--border); border-radius:var(--radius-sm);
-  font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:600; color:var(--text);
-  background:var(--surface2); transition:border .2s; outline:none;
-}
-.field-input:focus,.field-textarea:focus,.field-select:focus { border-color:var(--accent); background:white; }
-.field-textarea { resize:vertical; min-height:90px; }
-.field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.edit-actions { display:flex;gap:10px; margin-top:20px; }
-.edit-save { background:var(--accent); color:white; border:none; border-radius:50px; padding:12px 24px; font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:800; cursor:pointer; transition:all .2s; flex:1; }
-.edit-save:hover { background:#2d7a58; }
-.edit-cancel { background:var(--surface2); color:var(--text); border:none; border-radius:50px; padding:12px 24px; font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:800; cursor:pointer; transition:all .2s; }
-.edit-cancel:hover { background:var(--border); }
-.edit-btn { display:inline-flex;align-items:center;gap:5px; padding:6px 12px; border-radius:8px; border:1px solid var(--border); background:var(--surface); cursor:pointer; font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:700; color:var(--text-soft); transition:all .2s; }
-.edit-btn:hover { background:var(--surface2); border-color:var(--accent); color:var(--accent); }
-.edit-btn.danger:hover { background:rgba(231,76,60,.08); border-color:var(--wrong); color:var(--wrong); }
-/* hide edit buttons from guests */
-.edit-btn { display:none; }
-body.admin-mode .edit-btn { display:inline-flex; }
-
-/* ===================== PASSWORD MODAL ===================== */
-.pw-overlay { position:fixed;inset:0;z-index:999; background:rgba(0,0,0,0.45); backdrop-filter:blur(6px); display:flex;align-items:center;justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s; }
-.pw-overlay.open { opacity:1; pointer-events:all; }
-.pw-box { background:var(--card); border-radius:20px; padding:32px 28px; width:100%; max-width:340px; box-shadow:0 12px 40px rgba(0,0,0,.18); text-align:center; transform:translateY(16px); transition:transform .3s; }
-.pw-overlay.open .pw-box { transform:translateY(0); }
-.pw-icon { font-size:2.4rem; margin-bottom:12px; display:block; }
-.pw-title { font-family:'Baloo 2',sans-serif; font-size:1.2rem; font-weight:800; margin-bottom:6px; }
-.pw-sub { font-size:.82rem; color:var(--text-muted); font-weight:600; margin-bottom:20px; }
-.pw-input { width:100%; padding:12px 14px; border:2px solid var(--border); border-radius:10px; font-family:'Nunito',sans-serif; font-size:1rem; font-weight:700; text-align:center; letter-spacing:.18em; outline:none; transition:border .2s; background:var(--surface2); }
-.pw-input:focus { border-color:var(--accent); background:white; }
-.pw-input.shake { animation:shake .4s; border-color:var(--wrong); }
-@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
-.pw-error { font-size:.78rem; color:var(--wrong); font-weight:700; margin-top:8px; min-height:18px; }
-.pw-actions { display:flex;gap:10px;margin-top:16px; }
-.pw-submit { flex:1; background:var(--accent); color:white; border:none; border-radius:50px; padding:12px; font-family:'Nunito',sans-serif; font-size:.92rem; font-weight:800; cursor:pointer; transition:all .2s; }
-.pw-submit:hover { background:#2d7a58; }
-.pw-cancel { background:var(--surface2); color:var(--text); border:none; border-radius:50px; padding:12px 18px; font-family:'Nunito',sans-serif; font-size:.92rem; font-weight:800; cursor:pointer; transition:all .2s; }
-.pw-cancel:hover { background:var(--border); }
-
-/* Admin badge in nav */
-.admin-badge { display:none; align-items:center;gap:5px; padding:5px 11px; border-radius:50px; background:rgba(61,153,112,.15); color:var(--accent); font-size:.75rem; font-weight:800; border:1px solid rgba(61,153,112,.3); }
-body.admin-mode .admin-badge { display:flex; }
-.admin-logout { cursor:pointer; opacity:.7; transition:opacity .2s; }
-.admin-logout:hover { opacity:1; }
-.add-btn { width:100%; padding:12px; border:2px dashed var(--border); background:transparent; border-radius:var(--radius-sm); cursor:pointer; font-family:'Nunito',sans-serif; font-size:.88rem; font-weight:700; color:var(--text-muted); transition:all .2s; display:flex;align-items:center;justify-content:center;gap:6px; }
-.add-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-light); }
-
-/* ===================== ARTICLES ===================== */
-.articles-grid { display:grid; gap:14px; }
-.article-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; box-shadow:0 2px 8px var(--shadow); position:relative; transition:all .2s; }
-.article-card:hover { transform:translateY(-2px); box-shadow:0 5px 16px var(--shadow); }
-.art-meta { display:flex;align-items:center;gap:8px; margin-bottom:10px; }
-.art-tag { padding:3px 10px; border-radius:50px; font-size:.7rem; font-weight:800; background:var(--accent-light); color:var(--accent); }
-.art-date { font-size:.72rem; color:var(--text-muted); font-weight:600; }
-.art-title { font-family:'Baloo 2',sans-serif; font-size:1.05rem; font-weight:700; line-height:1.4; margin-bottom:8px; color:var(--text); }
-.art-excerpt { font-size:.84rem; color:var(--text-soft); line-height:1.65; }
-.art-actions { display:flex;gap:8px; margin-top:14px; }
-.art-read { display:inline-flex;align-items:center;gap:5px; font-size:.78rem; font-weight:800; color:var(--accent); text-decoration:none; transition:gap .2s; }
-.art-read:hover { gap:8px; }
-
-/* ===================== QUIZ ===================== */
-.quiz-list { display:grid;gap:12px; }
-.quiz-item { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px; display:flex;align-items:center;gap:14px; cursor:pointer; transition:all .2s; box-shadow:0 2px 8px var(--shadow); }
-.quiz-item:hover { transform:translateX(4px); border-color:var(--accent); }
-.quiz-item-icon { font-size:1.8rem; flex-shrink:0; }
-.quiz-item-info { flex:1; }
-.quiz-item-title { font-weight:800; font-size:.95rem; margin-bottom:3px; }
-.quiz-item-meta { font-size:.75rem; color:var(--text-muted); font-weight:600; }
-.quiz-item-arrow { color:var(--text-muted); font-size:1.1rem; }
-/* In-page quiz */
-.qcard { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:28px; box-shadow:0 4px 20px var(--shadow); }
-.qprog { height:5px; background:var(--border); border-radius:3px; margin-bottom:24px; overflow:hidden; }
-.qprog-fill { height:100%; background:var(--accent); border-radius:3px; transition:width .4s; }
-.qmeta { display:flex;align-items:center;justify-content:space-between; margin-bottom:20px; }
-.qcount { font-size:.8rem; font-weight:700; color:var(--text-muted); }
-.qscore { background:var(--accent-light); padding:5px 12px; border-radius:50px; font-size:.8rem; font-weight:800; color:var(--accent); }
-.qtag { display:inline-flex;align-items:center;gap:5px; padding:4px 11px; border-radius:50px; background:var(--surface2); color:var(--text-soft); font-size:.76rem; font-weight:700; margin-bottom:14px; }
-.qquestion { font-family:'Baloo 2',sans-serif; font-size:1.25rem; font-weight:700; line-height:1.45; margin-bottom:20px; }
-.qopts { display:grid;gap:9px; }
-.qopt { background:var(--surface2); border:2px solid var(--border); border-radius:10px; padding:13px 16px; cursor:pointer; font-family:'Nunito',sans-serif; font-size:.92rem; font-weight:700; text-align:left; width:100%; transition:all .2s; color:var(--text); display:flex;align-items:center;gap:11px; }
-.qopt:hover:not(:disabled) { background:var(--accent-light); border-color:var(--accent); transform:translateX(4px); }
-.qopt.correct { background:rgba(46,204,113,.1); border-color:var(--correct); color:#1a7a40; }
-.qopt.wrong { background:rgba(231,76,60,.1); border-color:var(--wrong); color:#922b21; }
-.qopt:disabled { cursor:default; }
-.opt-l { width:26px;height:26px; border-radius:7px; background:var(--border); color:var(--text-soft); display:flex;align-items:center;justify-content:center; font-size:.76rem; font-weight:800; flex-shrink:0; transition:all .2s; }
-.qopt.correct .opt-l { background:var(--correct); color:white; }
-.qopt.wrong .opt-l { background:var(--wrong); color:white; }
-.qexp { background:var(--surface2); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:10px; padding:14px; margin-top:14px; font-size:.85rem; line-height:1.65; color:var(--text-soft); display:none; }
-.qexp.show { display:block; animation:fadeUp .3s; }
-.yt-link { display:inline-flex;align-items:center;gap:5px; margin-top:8px; background:#ff0000; color:white; padding:7px 13px; border-radius:7px; font-size:.78rem; font-weight:800; text-decoration:none; transition:all .2s; }
-.yt-link:hover { background:#cc0000; transform:translateY(-1px); }
-.qnext { width:100%; padding:13px; background:var(--accent); color:white; border:none; border-radius:10px; font-family:'Nunito',sans-serif; font-size:.95rem; font-weight:800; cursor:pointer; transition:all .2s; margin-top:10px; display:none; }
-.qnext.show { display:block; }
-.qnext:hover { background:#2d7a58; }
-/* Result */
-.result-box { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:36px 28px; text-align:center; box-shadow:0 4px 20px var(--shadow); }
-.res-emoji { font-size:3.5rem; display:block; margin-bottom:14px; }
-.res-big { font-family:'Baloo 2',sans-serif; font-size:3rem; font-weight:800; color:var(--accent); }
-.res-lbl { font-size:1.05rem; font-weight:700; margin:6px 0; }
-.res-msg { font-size:.88rem; color:var(--text-soft); line-height:1.65; margin-bottom:24px; }
-
-/* ===================== EXPLORE ===================== */
-.video-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:14px; }
-.vcard { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; cursor:pointer; transition:all .2s; box-shadow:0 2px 8px var(--shadow); text-decoration:none; display:block; }
-.vcard:hover { transform:translateY(-3px); box-shadow:0 6px 18px var(--shadow); }
-.vthumb { background:var(--surface2); height:110px; display:flex;align-items:center;justify-content:center; font-size:2.6rem; position:relative; overflow:hidden; }
-.vthumb::after { content:'▶'; position:absolute;inset:0; background:rgba(0,0,0,.25); display:flex;align-items:center;justify-content:center; color:white; font-size:1.5rem; opacity:0; transition:opacity .2s; }
-.vcard:hover .vthumb::after { opacity:1; }
-.vinfo { padding:11px 12px; }
-.vtitle { font-size:.8rem; font-weight:700; line-height:1.4; color:var(--text); margin-bottom:5px; }
-.vviews { font-size:.7rem; color:var(--text-muted); font-weight:600; }
-
-/* ===================== COMMUNITY ===================== */
-.lb-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:0 2px 10px var(--shadow); margin-bottom:20px; }
-.lb-head { background:var(--accent); color:white; padding:14px 18px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:.95rem; display:flex;align-items:center;gap:8px; }
-.lb-row { display:flex;align-items:center;gap:12px; padding:13px 18px; border-bottom:1px solid var(--border); transition:background .2s; }
-.lb-row:last-child { border-bottom:none; }
-.lb-row:hover { background:var(--surface2); }
-.lb-rank { font-family:'Baloo 2',sans-serif; font-size:1rem; font-weight:800; width:26px; text-align:center; color:var(--text-muted); }
-.lb-rank.gold { color:#f1c40f; }
-.lb-rank.silver { color:#95a5a6; }
-.lb-rank.bronze { color:#cd6133; }
-.lb-av { width:34px;height:34px; border-radius:50%; background:var(--surface2); border:2px solid var(--border); display:flex;align-items:center;justify-content:center; font-size:1rem; }
-.lb-name { flex:1; font-weight:700; font-size:.88rem; }
-.lb-pts { font-family:'Baloo 2',sans-serif; font-weight:800; font-size:.9rem; color:var(--accent); }
-
-/* ===================== CONTACT / SOCIAL ===================== */
-.contact-grid { display:grid; gap:14px; }
-.social-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-bottom:20px; }
-.social-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px 14px; text-align:center; text-decoration:none; transition:all .2s; box-shadow:0 2px 8px var(--shadow); position:relative; overflow:hidden; }
-.social-card::before { content:''; position:absolute;top:0;left:0;right:0;height:3px; background:var(--sc-color,var(--accent)); }
-.social-card:hover { transform:translateY(-3px); box-shadow:0 6px 18px var(--shadow); }
-.sc-icon { font-size:2rem; margin-bottom:8px; display:block; }
-.sc-name { font-weight:800; font-size:.85rem; color:var(--text); margin-bottom:3px; }
-.sc-handle { font-size:.74rem; color:var(--text-muted); font-weight:600; }
-.contact-form-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:24px; box-shadow:0 2px 8px var(--shadow); }
-.contact-form-title { font-family:'Baloo 2',sans-serif; font-weight:800; font-size:1.05rem; margin-bottom:18px; }
-.form-row { display:grid;grid-template-columns:1fr 1fr; gap:12px; }
-@media(max-width:480px){ .form-row { grid-template-columns:1fr; } }
-.cf-input,.cf-textarea { width:100%; padding:11px 13px; border:2px solid var(--border); border-radius:var(--radius-sm); font-family:'Nunito',sans-serif; font-size:.88rem; font-weight:600; color:var(--text); background:var(--surface2); outline:none; transition:border .2s; }
-.cf-input:focus,.cf-textarea:focus { border-color:var(--accent); background:white; }
-.cf-textarea { resize:vertical; min-height:100px; }
-.cf-label { font-size:.76rem; font-weight:800; color:var(--text-soft); margin-bottom:5px; display:block; text-transform:uppercase; letter-spacing:.04em; }
-.cf-group { margin-bottom:14px; }
-.cf-send { background:var(--accent); color:white; border:none; border-radius:50px; padding:12px 28px; font-family:'Nunito',sans-serif; font-size:.92rem; font-weight:800; cursor:pointer; transition:all .2s; display:flex;align-items:center;gap:7px; }
-.cf-send:hover { background:#2d7a58; transform:translateY(-1px); }
-.success-msg { background:rgba(46,204,113,.1); border:1px solid var(--correct); border-radius:10px; padding:13px 16px; font-size:.85rem; font-weight:700; color:#1a7a40; display:none;align-items:center;gap:8px; margin-top:12px; }
-.success-msg.show { display:flex; animation:fadeUp .3s; }
-
-/* ===================== FACT CARD ===================== */
-.fact-card { background:var(--card); border:1px solid var(--border); border-left:4px solid var(--accent2); border-radius:var(--radius); padding:20px; box-shadow:0 2px 8px var(--shadow); }
-.fact-lbl { font-size:.72rem; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px; }
-.fact-txt { font-size:.93rem; line-height:1.7; color:var(--text); font-weight:600; }
-
-
-
-/* ===================== MISC ===================== */
-.spacer { height:32px; }
-.divider { height:1px; background:var(--border); margin:20px 0; }
-.chip { display:inline-flex;align-items:center;gap:5px; padding:4px 10px; border-radius:50px; background:var(--surface2); color:var(--text-soft); font-size:.72rem; font-weight:700; }
-::-webkit-scrollbar { width:5px; }
-::-webkit-scrollbar-track { background:var(--bg); }
-::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
-
+.mode-toggle:hover{border-color:var(--accent);color:var(--accent)}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 </style>
 </head>
 <body>
 
-<!-- ========== TOP FEATURE NAV ========== -->
-<div class="top-feature-nav">
-  <div class="tfn-logo">
-    <div class="tfn-logo-icon">❓</div>
-    Kamu Yakin
-  </div>
-  <div class="tfn-divider"></div>
-  <button class="tfn-btn active" id="tfn-home" onclick="showPage('home')"><span class="tfn-icon">🏠</span> Home</button>
-  <button class="tfn-btn" id="tfn-artikel" onclick="showPage('artikel')"><span class="tfn-icon">📝</span> Artikel</button>
-  <button class="tfn-btn" id="tfn-quiz" onclick="showPage('quiz')"><span class="tfn-icon">🎮</span> Quiz</button>
-  <button class="tfn-btn" id="tfn-jelajahi" onclick="showPage('jelajahi')"><span class="tfn-icon">🔍</span> Jelajahi</button>
-  <button class="tfn-btn" id="tfn-komunitas" onclick="showPage('komunitas')"><span class="tfn-icon">👥</span> Komunitas</button>
-  <button class="tfn-btn" id="tfn-kontak" onclick="showPage('kontak')"><span class="tfn-icon">📬</span> Kontak</button>
-  <div class="admin-badge">🔓 Admin <span class="admin-logout" onclick="adminLogout()" title="Keluar mode admin">✕</span></div>
-  <button class="tfn-btn" onclick="requestAdmin()" id="tfn-admin-btn" style="flex-shrink:0" title="Login Admin">🔒</button>
-  <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="tfn-yt">▶ YouTube</a>
-</div>
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-brand" href="#" onclick="showPage('home');return false">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAsICAoIBwsKCQoNDAsNERwSEQ8PESIZGhQcKSQrKigkJyctMkA3LTA9MCcnOEw5PUNFSElIKzZPVU5GVEBHSEX/2wBDAQwNDREPESESEiFFLicuRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUX/wAARCABgAGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD1yiiigAooooAKKKKACiiigAoqnLqMUV/FaFWJdGcuoyse3B+Y/wAOQeM+lTi4iaVY1kUuybwAeq+v05oAlooooAKKKKACuS1j4g6ZpN29sRvdCVLPIsakg4OMnJwQRnGMg1QuPE+oNrLrFMRslKJaoFIyH27XyM5OOxGNy4BrjjZW9x8XrS1u4Y57d5ZlaOVQythpcZH4Cm1YmMlK9jp5Pi7YJ0itz9bhz/KM1Tl+MMH/ACzjth9PNb/2VaxfH+kW2kRaZoFjZQrc31y87zrEASGkIRFbHQbunsK6TxFYWDXuiTWNtGg0fV4bOXagG5WCHJ45GSB+dIoy2+MUrHEUcbH0W1Zv5yCoT8U9TuGVIYLhmcZVY7IZYe2WbNd5aaTpNt4qvNUgkT7VfJ9k8sLja6Al/wAwF/L3rD0tsa/4JOfv6VKn5ItAEHhfxlJqtpf3LRhZIYjKzCJUeTy8fu2xwQQ4weCOfx05nazsxJJeiZECwT26KqJszgohA3LjnGSc4IPXI4LwfKbaHxAFTeViuxt/4Cv+GfwrsPC9jL4ija+lZEt4X2owXKzuvIOePkDHOO54zgc8tdVnOKpbdTSHLZ8x3tq8skAaaOONiThY33jHbnAqaqGjxXEViBdwW8EjMW8uBdoGfXk8k5P41frqMwrJ1fxPo2hSLHqmoQ20jruCMSWI9cDJrWrzbx1bRaV4y0fXLiJJbO5H2O4EihlU9VPP1/8AHTUTk4xckr2Gld2J9W8TeGtXNrq1vrscX9mzgyExvucE5ACcbunoR+VcDfeKbCHx/ba5al7m3hlkchVKswLuR972auo1rwxFP4+0i7jiRbUqXlCqAoMfI/PI/KrEVxFqvxHdFVPs2k25HCjHmvgH9OPwrz3mMbXS6Xeu3T8zb2GpzN18Rra9e1e+0uWaSx1Bru1cyhSsZYkRng/5UelE3xS1S5+2R39iJ7eedJLaNjs8ja+4AEL83Rfyq78U4IbzTNP1O2IZVYxllGOGGR+oP511V9p6apcaDKy7orNvOcep2Db+uPypSzKMYRm1vfr2GqDbaPOovGOsR+MJNbg09yzs0i2bB2RSyKhYd84A5q9o/i7xfbaA8NlpHmw2ayKl41szNbr/ABAN049/TmtXTfE8uofEG/mtra6vIYLYwRJbJvOA4y2Mjgnv9K7XwGwk0O+E8bR51C5DRygArl/ukevOK66NWpN2lGytczlFLZnl3g06/pujahrenWFvNBGHdrm5k4XC/ONgOWJBHWukfSLW9sotR8Zag6vNjy7ZZfJhtwfuoo9cf571tLobeHvAHirT9uIkNy8J9Y2jBX8un4V5h4d0fU/GDeTc3832G1ILNIxfBPZQe+B+FZ4zmUObn5Yrd9fkOlZu1rs9F028m8F63ZWz38tzoGoN5SfaH3Nayfw4b+6f89OfSa8W8T3tje3WmeH7RhMts/mTkHIRI0PBPrgEn6V7Bp/m/wBn23n583yk3567sDP608DOpUoKVTf9OgVlFTtEs1y/jC1tvEWlX+gg/wCneR58II/jU/Lg+vHT0auornpbXSbbxTbJJJi6uQ88VsVJUyDAaX2bacV1u/QyOV0DWnuvCMeoTITLBC4kB6syA5/PFYvw5imnsNT1Jzm4u5yNx7kDP82qDSdd03TvBt1bXd3Gk8jXCrEMsxySBwOn41i2fi6Cy8Irotjb3DXkiMrSggAMxycY5PHHavmfqlRqrTpx+KSXyu39x3+1XuuT2R12o6DNB8PZ9NuZFnmt4mdXUEZ2sXHX2yK2RqUdpBpKyYC3m2JWPZtmR+eMV53otz4o0rTp4I7BVhuG3GTUD5fUYON7LnIqxNYeJdZt7WCS+tvLtmVolt4nkKlRgHMaN/OtXldabcZtWu3f1Xb1JWIitUdN4J0f+w/ibfxRri2uLJ5YfYF1yPwOR+Va5Z4/B3jJo2KvFe3jqw6qRhga5IeHvFss6ztq+piZVKh4rSVSAcZHIXg4H5VSufDGuWiF7zVb/wCyTzqLmORZYjLvOGPPysSBzzXu0IzjTUaju0ck2nJtbHbXnjW28QeB544La8mvLuyeN1gtnZUlKkFd2MdfTPBrgvDEeu6f4X1G6sVtfs+X3xy7hLlVwxGOhHofSvRdL8Mac+j2M11b288kkQkk82MMqIVyqR5+4FyOR1xk8nNcBrVvq1zqEtjoJuJzco6zxoQWlRCArMT1OGCk9Tt571y1pfWL0o26PXa1zSK5PeZ0vw+8DKtnbX84DJdRJLJISDvU/MIlHYcAsTycbQMZJ9UrG8KafLpXhfTrG4KmaCEJJtOQG7jPsePwrZrvMQqC5JjUTJB50q8KBjIBIzz/AJ6VPRQJ6o8qvPhTbQ6tcXCq9xbOTKBM+yOPJ+78uXcj/gI966zS/A9jYxgeYygjmO1UW6n6lfnP4sa6milrfyGZ9roemWTb7awt45P+enlgufqx5P51oUUUwErz74i+K7O2tRpqENIJkZ5xz5LKwYYH8RGBkcDBx1OK9BYZUgHGe47V5p4e+GFzFrxvfEVzFewWx/0eNST5hzkM4I/HHOT+oBk/29rdrYQ2S6ZfrG8Y8qP7G0uFPQI2QCPTcMgcHOK6PwVoF/pcz6xqtq63d0BBFAGDNDETuJc92ZuT/ToO+pazhShBuUVqxylKStcr2lnBZI6W6bVdy55zkmrFFFaCCiiigAooooAKKKKACiiigAooooAKKKKAP//Z" alt="Kamu Yakin">
+    <span class="nav-brand-name">Kamu Yakin?</span>
+  </a>
+  <div class="nav-sep"></div>
+  <button class="nb active" id="nb-home" onclick="showPage('home')">🏠 Home</button>
+  <button class="nb" id="nb-artikel" onclick="showPage('artikel')">📝 Artikel</button>
+  <button class="nb" id="nb-quiz" onclick="showPage('quiz')">🎮 Quiz</button>
+  <button class="nb" id="nb-komunitas" onclick="showPage('komunitas')">👥 Komunitas</button>
+  <button class="nb" id="nb-youtube" onclick="showPage('youtube')">▶ YouTube</button>
+  <button class="nb" id="nb-kontak" onclick="showPage('kontak')">📬 Kontak</button>
+  <div class="admin-badge">🟢 Admin <span style="cursor:pointer;opacity:.7;margin-left:3px" onclick="adminOut()">✕</span></div>
+  <button class="lock-btn" onclick="openPw(null)">🔒</button>
+  <button class="mode-toggle" id="mode-toggle" onclick="toggleMode()"><span id="mode-icon">☀️</span><span id="mode-label">Light</span></button>
+  <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="nav-yt">▶ YouTube</a>
+</nav>
 
-<!-- ========== PASSWORD MODAL ========== -->
-<div class="pw-overlay" id="pw-modal">
+<!-- PASSWORD -->
+<div class="pw-modal" id="pw-modal">
   <div class="pw-box">
     <span class="pw-icon">🔐</span>
     <div class="pw-title">Mode Admin</div>
-    <div class="pw-sub">Masukkan password untuk mengakses fitur edit</div>
-    <input class="pw-input" id="pw-input" type="password" placeholder="••••••••" maxlength="20" onkeydown="if(event.key==='Enter')submitPassword()">
-    <div class="pw-error" id="pw-error"></div>
-    <div class="pw-actions">
-      <button class="pw-cancel" onclick="closePwModal()">Batal</button>
-      <button class="pw-submit" onclick="submitPassword()">🔓 Masuk</button>
+    <div class="pw-sub">Masukkan password untuk edit konten</div>
+    <input class="pw-inp" id="pw-inp" type="password" placeholder="••••••••" maxlength="20">
+    <div class="pw-err" id="pw-err"></div>
+    <div class="pw-acts">
+      <button class="pw-no" onclick="closePw()">Batal</button>
+      <button class="pw-ok" onclick="submitPw()">Masuk 🔓</button>
     </div>
   </div>
 </div>
 
-<!-- ================================================================ -->
 <!-- HOME -->
-<!-- ================================================================ -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <div class="hero-badge">🎯 Mitos vs Fakta · Channel YouTube</div>
-    <h1>Kamu <span>Yakin</span><br>Tahu Faktanya?</h1>
-    <p>Belajar fakta seru tentang hewan, alam, tumbuhan, mitologi, dan makanan sambil bermain quiz. Dari channel yang bikin kamu bilang <em>"Wah, beneran?!"</em></p>
-    <div class="btn-row">
-      <button class="btn green" onclick="showPage('quiz')">🎮 Main Quiz</button>
-      <button class="btn outline" onclick="showPage('artikel')">📝 Baca Artikel</button>
+    <img src="data:image/jpeg;base64,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" alt="Kamu Yakin Official" class="hero-logo">
+    <div class="hero-pill">✨ Mitos vs Fakta · Channel YouTube</div>
+    <h1>Kamu <em>Yakin</em><br>Tahu Faktanya?</h1>
+    <p>Belajar fakta seru tentang hewan, alam, tumbuhan, mitologi, dan makanan sambil bermain quiz yang bikin kamu bilang — <strong style="color:var(--accent)">"Wah, beneran?!"</strong></p>
+    <div class="hero-btns">
+      <button class="btn btn-primary" onclick="showPage('quiz')">🎮 Main Quiz</button>
+      <button class="btn btn-ghost" onclick="showPage('artikel')">📝 Baca Artikel</button>
     </div>
   </div>
   <div class="wrap" style="padding-top:0">
-    <div class="stats-row">
-      <div class="stat-card"><div class="stat-n">20+</div><div class="stat-l">Video</div></div>
-      <div class="stat-card"><div class="stat-n">81</div><div class="stat-l">Subscriber</div></div>
-      <div class="stat-card"><div class="stat-n">10+</div><div class="stat-l">Quiz</div></div>
-      <div class="stat-card"><div class="stat-n">∞</div><div class="stat-l">Fakta Seru</div></div>
+    <div class="stats">
+      <div class="stat"><div class="stat-n">20+</div><div class="stat-l">Video</div></div>
+      <div class="stat"><div class="stat-n">81</div><div class="stat-l">Subscriber</div></div>
+      <div class="stat"><div class="stat-n">10+</div><div class="stat-l">Quiz</div></div>
+      <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Fakta</div></div>
     </div>
     <div class="fact-card">
-      <div class="fact-lbl">🌟 Fakta Hari Ini</div>
+      <div class="fact-tag">⚡ Fakta Hari Ini</div>
       <div class="fact-txt" id="daily-fact">Memuat fakta seru...</div>
-      <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="yt-link" style="margin-top:12px">▶ Tonton Video</a>
+      <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="yt-btn">▶ Tonton Video</a>
     </div>
   </div>
-  <div class="spacer"></div>
 </div>
 
-<!-- ================================================================ -->
 <!-- ARTIKEL -->
-<!-- ================================================================ -->
 <div class="page" id="page-artikel">
   <div class="wrap">
-    <div class="section-hd">
-      <div class="section-title">📝 Artikel Fakta</div>
-      <button class="edit-btn" onclick="openEditPanel('artikel-add')">✏️ Tambah Artikel</button>
+    <div class="sec-hd">
+      <div class="sec-title">📝 Artikel Fakta</div>
+      <button class="edit-btn" onclick="openEp('art')">✏️ Tambah</button>
     </div>
-    <div class="articles-grid" id="articles-container"></div>
+    <div class="art-grid" id="art-grid"></div>
   </div>
-  <div class="spacer"></div>
 </div>
 
-<!-- ================================================================ -->
 <!-- QUIZ -->
-<!-- ================================================================ -->
 <div class="page" id="page-quiz">
   <div class="wrap">
-    <!-- List mode -->
-    <div id="quiz-list-view">
-      <div class="section-hd">
-        <div class="section-title">🎮 Pilih Quiz</div>
-        <button class="edit-btn" onclick="openEditPanel('quiz-manage')">⚙️ Kelola Soal</button>
+    <div id="qv-list">
+      <div class="sec-hd">
+        <div class="sec-title">🎮 Pilih Topik Quiz</div>
+        <button class="edit-btn" onclick="openEp('q')">⚙️ Kelola Soal</button>
       </div>
-      <div class="quiz-list" id="quiz-topics-list"></div>
+      <div class="quiz-grid" id="quiz-topics"></div>
     </div>
-    <!-- Play mode -->
-    <div id="quiz-play-view" style="display:none">
-      <button class="edit-btn" onclick="backToQuizList()" style="margin-bottom:18px">← Kembali</button>
-      <div class="qcard">
-        <div class="qprog"><div class="qprog-fill" id="qpf"></div></div>
-        <div class="qmeta">
-          <div class="qcount" id="qct">Soal 1/5</div>
-          <div class="qscore">⭐ <span id="qls">0</span> pts</div>
-        </div>
-        <div class="qtag" id="qtt">🐾 Hewan</div>
-        <div class="qquestion" id="qq">...</div>
-        <div class="qopts" id="qo"></div>
-        <div class="qexp" id="qe"><strong>💡 Fakta:</strong> <span id="qet"></span><br><br><a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="yt-link">▶ Tonton di YouTube</a></div>
+    <div id="qv-play" style="display:none">
+      <button onclick="backToTopics()" style="background:var(--bg3);border:1px solid var(--border);border-radius:50px;padding:8px 16px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:.8rem;color:var(--text2);margin-bottom:18px;transition:all .2s">← Kembali</button>
+      <div class="q-card">
+        <div class="q-prog"><div class="q-prog-fill" id="qpf"></div></div>
+        <div class="q-meta"><div class="q-num" id="qnum">Soal 1/5</div><div class="q-pts">⭐ <span id="qpts">0</span> pts</div></div>
+        <div class="q-topic" id="qtopic"></div>
+        <div class="q-question" id="qquestion"></div>
+        <div class="q-opts" id="qopts"></div>
+        <div class="q-exp" id="qexp"><strong style="color:var(--accent)">💡 Fakta:</strong> <span id="qexptext"></span><br><br><a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="yt-btn">▶ Tonton di YouTube</a></div>
       </div>
-      <button class="qnext" id="qnb" onclick="nextQ()">Soal Berikutnya →</button>
+      <button class="q-next" id="qnext" onclick="nextQ()">Soal Berikutnya →</button>
     </div>
-    <!-- Result mode -->
-    <div id="quiz-result-view" style="display:none">
+    <div id="qv-result" style="display:none">
       <div class="result-box">
-        <span class="res-emoji" id="re">🎉</span>
-        <div class="res-big" id="rs">4/5</div>
-        <div class="res-lbl" id="rl">Keren!</div>
-        <div class="res-msg" id="rm">Kamu luar biasa!</div>
-        <div class="btn-row" style="margin-top:0">
-          <button class="btn green" onclick="backToQuizList()">🔄 Main Lagi</button>
-          <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="btn outline">▶ YouTube</a>
+        <span class="res-emoji" id="res-emoji">🎉</span>
+        <div class="res-score" id="res-score">4/5</div>
+        <div class="res-lbl" id="res-lbl">Keren!</div>
+        <div class="res-msg" id="res-msg"></div>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="backToTopics()">🔄 Main Lagi</button>
+          <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="btn btn-ghost">▶ YouTube</a>
         </div>
       </div>
     </div>
   </div>
-  <div class="spacer"></div>
 </div>
 
-<!-- ================================================================ -->
-<!-- JELAJAHI -->
-<!-- ================================================================ -->
-<div class="page" id="page-jelajahi">
-  <div class="wrap">
-    <div class="section-hd">
-      <div class="section-title">🔍 Jelajahi Video</div>
-      <button class="edit-btn" onclick="openEditPanel('video-manage')">✏️ Edit Video</button>
-    </div>
-    <div class="video-grid" id="video-grid"></div>
-  </div>
-  <div class="spacer"></div>
-</div>
-
-<!-- ================================================================ -->
 <!-- KOMUNITAS -->
-<!-- ================================================================ -->
 <div class="page" id="page-komunitas">
   <div class="wrap">
-    <div class="section-hd">
-      <div class="section-title">🏆 Leaderboard</div>
-      <button class="edit-btn" onclick="openEditPanel('lb-manage')">✏️ Edit Pemain</button>
+    <div class="sec-hd">
+      <div class="sec-title">🏆 Leaderboard</div>
+      <button class="edit-btn" onclick="openEp('lb')">✏️ Edit</button>
     </div>
-    <div class="lb-card">
+    <div class="lb-wrap">
       <div class="lb-head">🥇 Top Pemain Minggu Ini</div>
       <div id="lb-rows"></div>
     </div>
-    <div class="section-hd">
-      <div class="section-title">📣 Bergabung</div>
-    </div>
-    <div class="fact-card" style="border-left-color:var(--accent)">
-      <div class="fact-lbl">🤝 Komunitas Kamu Yakin</div>
-      <div class="fact-txt">Share skor quiz kamu dan tantang teman! Subscribe channel kami untuk soal baru setiap minggu.</div>
-      <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="yt-link" style="margin-top:12px">🔔 Subscribe Sekarang</a>
+    <div class="comm-card">
+      <div class="comm-title">🤝 Bergabung dengan Komunitas</div>
+      <div class="comm-txt">Share skor quiz kamu, tantang teman, dan subscribe untuk soal fakta baru tiap minggu!</div>
+      <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="yt-btn" style="margin-top:14px">🔔 Subscribe Sekarang</a>
     </div>
   </div>
-  <div class="spacer"></div>
 </div>
 
-<!-- ================================================================ -->
-<!-- KONTAK & SOSIAL MEDIA -->
-<!-- ================================================================ -->
+<!-- YOUTUBE COVER -->
+<div class="page" id="page-youtube">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div class="sec-title">▶ Channel YouTube</div>
+    </div>
+    <div class="yt-cover">
+      <div class="yt-banner">
+        <img src="data:image/jpeg;base64,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" alt="Kamu Yakin" class="yt-banner-logo">
+      </div>
+      <div class="yt-info">
+        <div>
+          <div class="yt-channel-name">Kamu Yakin? Official</div>
+          <div class="yt-sub">@Kamuyakinoffcial · 81 subscriber</div>
+        </div>
+        <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="yt-subscribe">▶ Subscribe</a>
+      </div>
+      <div class="yt-stats">
+        <div class="yt-stat"><div class="yt-stat-n">20+</div><div class="yt-stat-l">Video</div></div>
+        <div class="yt-stat"><div class="yt-stat-n">81</div><div class="yt-stat-l">Subscriber</div></div>
+        <div class="yt-stat"><div class="yt-stat-n">1rb+</div><div class="yt-stat-l">Views</div></div>
+      </div>
+    </div>
+    <div class="sec-hd" style="margin-top:24px">
+      <div class="sec-title">🎬 Video Terbaru</div>
+      <button class="edit-btn" onclick="openEp('v')">✏️ Edit</button>
+    </div>
+    <div id="vid-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:12px"></div>
+  </div>
+</div>
+
+<!-- KONTAK -->
 <div class="page" id="page-kontak">
   <div class="wrap">
-    <!-- Social Media -->
-    <div class="section-hd">
-      <div class="section-title">🌐 Media Sosial</div>
-      <button class="edit-btn" onclick="openEditPanel('social-manage')">✏️ Edit Sosmed</button>
+    <div class="sec-hd">
+      <div class="sec-title">🌐 Media Sosial</div>
+      <button class="edit-btn" onclick="openEp('sc')">✏️ Edit</button>
     </div>
     <div class="social-grid" id="social-grid"></div>
-
     <div class="divider"></div>
-
-    <!-- Contact Form -->
-    <div class="section-hd">
-      <div class="section-title">📬 Hubungi Kami</div>
-      <button class="edit-btn" onclick="openEditPanel('contact-settings')">⚙️ Pengaturan</button>
+    <div class="sec-hd">
+      <div class="sec-title">📬 Hubungi Kami</div>
     </div>
-    <div class="contact-form-card">
-      <div class="contact-form-title">Punya pertanyaan, kolaborasi, atau saran?</div>
-      <div class="form-row">
-        <div class="cf-group"><label class="cf-label">Nama</label><input class="cf-input" id="cf-name" placeholder="Nama kamu..."></div>
-        <div class="cf-group"><label class="cf-label">Email</label><input class="cf-input" id="cf-email" placeholder="email@contoh.com"></div>
+    <div class="contact-box">
+      <div class="email-row">
+        <div class="email-icon">✉️</div>
+        <div>
+          <div class="email-lbl">Email Langsung</div>
+          <div class="email-val" id="contact-email-display">sheilaanadia [at] gmail.com</div>
+        </div>
       </div>
-      <div class="cf-group"><label class="cf-label">Subjek</label><input class="cf-input" id="cf-subject" placeholder="Tentang apa?"></div>
-      <div class="cf-group"><label class="cf-label">Pesan</label><textarea class="cf-textarea" id="cf-msg" placeholder="Tulis pesanmu di sini..."></textarea></div>
-      <button class="cf-send" onclick="sendContact()">📩 Kirim Pesan</button>
-      <div class="success-msg" id="cf-success">✅ Pesan terkirim! Kami akan membalasnya segera.</div>
+      <div class="contact-title">Ada pertanyaan, kolaborasi, atau saran? Gaskeun! 🔥</div>
+      <div class="form-2col">
+        <div class="cf-grp"><label class="cf-lbl">Nama</label><input class="cf-inp" id="cf-name" placeholder="Nama kamu..."></div>
+        <div class="cf-grp"><label class="cf-lbl">Email</label><input class="cf-inp" id="cf-email" placeholder="email kamu..."></div>
+      </div>
+      <div class="cf-grp"><label class="cf-lbl">Subjek</label><input class="cf-inp" id="cf-subj" placeholder="Mau ngomongin apa nih?"></div>
+      <div class="cf-grp"><label class="cf-lbl">Pesan</label><textarea class="cf-ta" id="cf-msg" placeholder="Tulis di sini..."></textarea></div>
+      <button class="cf-send" onclick="sendMsg()">📩 Kirim Pesan</button>
+      <div class="cf-ok" id="cf-ok">✅ Pesan terkirim! Kami bakal bales segera.</div>
     </div>
   </div>
-  <div class="spacer"></div>
 </div>
 
-<!-- ================================================================ -->
 <!-- EDIT PANELS -->
-<!-- ================================================================ -->
-
-<!-- ARTIKEL ADD/EDIT -->
-<div class="edit-panel" id="ep-artikel-add">
-  <div class="edit-overlay" onclick="closeEditPanel('artikel-add')"></div>
-  <div class="edit-sheet">
-    <div class="edit-sheet-handle"></div>
-    <div class="edit-sheet-header">
-      <div class="edit-sheet-title">✏️ Tambah / Edit Artikel</div>
-      <button class="edit-close" onclick="closeEditPanel('artikel-add')">✕</button>
-    </div>
-    <div class="edit-body">
-      <div class="field-group"><label class="field-label">Judul Artikel</label><input class="field-input" id="art-title-input" placeholder="Contoh: Fakta Mengejutkan tentang Piranha..."></div>
-      <div class="field-row">
-        <div class="field-group"><label class="field-label">Topik / Tag</label><input class="field-input" id="art-tag-input" placeholder="🐾 Hewan"></div>
-        <div class="field-group"><label class="field-label">Emoji</label><input class="field-input" id="art-emoji-input" placeholder="🦈"></div>
-      </div>
-      <div class="field-group"><label class="field-label">Ringkasan (excerpt)</label><textarea class="field-textarea" id="art-excerpt-input" placeholder="Deskripsi singkat artikel..."></textarea></div>
-      <div class="field-group"><label class="field-label">Link YouTube (opsional)</label><input class="field-input" id="art-yt-input" placeholder="https://youtube.com/..."></div>
-      <div class="edit-actions">
-        <button class="edit-cancel" onclick="closeEditPanel('artikel-add')">Batal</button>
-        <button class="edit-save" onclick="saveArticle()">💾 Simpan Artikel</button>
-      </div>
-      <div class="divider"></div>
-      <div class="section-title" style="font-size:.95rem;margin-bottom:14px">📋 Artikel Tersimpan</div>
-      <div id="art-saved-list"></div>
-    </div>
-  </div>
-</div>
-
-<!-- QUIZ MANAGE -->
-<div class="edit-panel" id="ep-quiz-manage">
-  <div class="edit-overlay" onclick="closeEditPanel('quiz-manage')"></div>
-  <div class="edit-sheet">
-    <div class="edit-sheet-handle"></div>
-    <div class="edit-sheet-header">
-      <div class="edit-sheet-title">⚙️ Kelola Soal Quiz</div>
-      <button class="edit-close" onclick="closeEditPanel('quiz-manage')">✕</button>
-    </div>
-    <div class="edit-body">
-      <div class="field-group"><label class="field-label">Pertanyaan</label><textarea class="field-textarea" id="q-question-input" placeholder="Tulis pertanyaan quiz..."></textarea></div>
-      <div class="field-row">
-        <div class="field-group"><label class="field-label">Topik</label><input class="field-input" id="q-topic-input" placeholder="🐾 Hewan"></div>
-        <div class="field-group"><label class="field-label">Jawaban Benar (0–3)</label><input class="field-input" id="q-answer-input" type="number" min="0" max="3" placeholder="1"></div>
-      </div>
-      <div class="field-group"><label class="field-label">Opsi A</label><input class="field-input" id="q-a-input" placeholder="Jawaban A"></div>
-      <div class="field-group"><label class="field-label">Opsi B</label><input class="field-input" id="q-b-input" placeholder="Jawaban B"></div>
-      <div class="field-group"><label class="field-label">Opsi C</label><input class="field-input" id="q-c-input" placeholder="Jawaban C"></div>
-      <div class="field-group"><label class="field-label">Opsi D</label><input class="field-input" id="q-d-input" placeholder="Jawaban D"></div>
-      <div class="field-group"><label class="field-label">Penjelasan Fakta</label><textarea class="field-textarea" id="q-exp-input" placeholder="Jelaskan fakta di balik soal ini..."></textarea></div>
-      <div class="edit-actions">
-        <button class="edit-cancel" onclick="closeEditPanel('quiz-manage')">Batal</button>
-        <button class="edit-save" onclick="saveQuestion()">💾 Tambah Soal</button>
-      </div>
-      <div class="divider"></div>
-      <div class="section-title" style="font-size:.95rem;margin-bottom:14px">📋 Soal Tersimpan (<span id="q-count">0</span>)</div>
-      <div id="q-saved-list"></div>
-    </div>
-  </div>
-</div>
-
-<!-- VIDEO MANAGE -->
-<div class="edit-panel" id="ep-video-manage">
-  <div class="edit-overlay" onclick="closeEditPanel('video-manage')"></div>
-  <div class="edit-sheet">
-    <div class="edit-sheet-handle"></div>
-    <div class="edit-sheet-header">
-      <div class="edit-sheet-title">🎬 Kelola Video</div>
-      <button class="edit-close" onclick="closeEditPanel('video-manage')">✕</button>
-    </div>
-    <div class="edit-body">
-      <div class="field-group"><label class="field-label">Judul Video</label><input class="field-input" id="v-title-input" placeholder="Judul video shorts..."></div>
-      <div class="field-row">
-        <div class="field-group"><label class="field-label">Emoji Thumbnail</label><input class="field-input" id="v-emoji-input" placeholder="🐟"></div>
-        <div class="field-group"><label class="field-label">Jumlah Views</label><input class="field-input" id="v-views-input" placeholder="1,2 rb"></div>
-      </div>
-      <div class="field-group"><label class="field-label">Link YouTube</label><input class="field-input" id="v-link-input" placeholder="https://youtube.com/shorts/..."></div>
-      <div class="edit-actions">
-        <button class="edit-cancel" onclick="closeEditPanel('video-manage')">Batal</button>
-        <button class="edit-save" onclick="saveVideo()">💾 Tambah Video</button>
-      </div>
-      <div class="divider"></div>
-      <div class="section-title" style="font-size:.95rem;margin-bottom:14px">📋 Video Tersimpan</div>
-      <div id="v-saved-list"></div>
-    </div>
-  </div>
-</div>
-
-<!-- LEADERBOARD MANAGE -->
-<div class="edit-panel" id="ep-lb-manage">
-  <div class="edit-overlay" onclick="closeEditPanel('lb-manage')"></div>
-  <div class="edit-sheet">
-    <div class="edit-sheet-handle"></div>
-    <div class="edit-sheet-header">
-      <div class="edit-sheet-title">🏆 Kelola Leaderboard</div>
-      <button class="edit-close" onclick="closeEditPanel('lb-manage')">✕</button>
-    </div>
-    <div class="edit-body">
-      <div class="field-row">
-        <div class="field-group"><label class="field-label">Nama Pemain</label><input class="field-input" id="lb-name-input" placeholder="Username..."></div>
-        <div class="field-group"><label class="field-label">Poin</label><input class="field-input" id="lb-pts-input" type="number" placeholder="500"></div>
-      </div>
-      <div class="field-group"><label class="field-label">Emoji Avatar</label><input class="field-input" id="lb-emoji-input" placeholder="🦈"></div>
-      <div class="edit-actions">
-        <button class="edit-cancel" onclick="closeEditPanel('lb-manage')">Batal</button>
-        <button class="edit-save" onclick="addLeaderboardEntry()">➕ Tambah Pemain</button>
-      </div>
-      <div class="divider"></div>
-      <div class="section-title" style="font-size:.95rem;margin-bottom:14px">📋 Daftar Pemain</div>
-      <div id="lb-edit-list"></div>
-    </div>
-  </div>
-</div>
-
-<!-- SOCIAL MANAGE -->
-<div class="edit-panel" id="ep-social-manage">
-  <div class="edit-overlay" onclick="closeEditPanel('social-manage')"></div>
-  <div class="edit-sheet">
-    <div class="edit-sheet-handle"></div>
-    <div class="edit-sheet-header">
-      <div class="edit-sheet-title">🌐 Kelola Media Sosial</div>
-      <button class="edit-close" onclick="closeEditPanel('social-manage')">✕</button>
-    </div>
-    <div class="edit-body">
-      <div class="field-row">
-        <div class="field-group"><label class="field-label">Platform</label><input class="field-input" id="sc-name-input" placeholder="Instagram"></div>
-        <div class="field-group"><label class="field-label">Emoji Ikon</label><input class="field-input" id="sc-icon-input" placeholder="📸"></div>
-      </div>
-      <div class="field-group"><label class="field-label">Username / Handle</label><input class="field-input" id="sc-handle-input" placeholder="@kamuyakin26"></div>
-      <div class="field-group"><label class="field-label">Link URL</label><input class="field-input" id="sc-link-input" placeholder="https://instagram.com/..."></div>
-      <div class="field-group"><label class="field-label">Warna Aksen (hex)</label><input class="field-input" id="sc-color-input" placeholder="#E1306C"></div>
-      <div class="edit-actions">
-        <button class="edit-cancel" onclick="closeEditPanel('social-manage')">Batal</button>
-        <button class="edit-save" onclick="saveSocial()">💾 Simpan</button>
-      </div>
-      <div class="divider"></div>
-      <div class="section-title" style="font-size:.95rem;margin-bottom:14px">📋 Platform Tersimpan</div>
-      <div id="sc-saved-list"></div>
-    </div>
-  </div>
-</div>
-
-<!-- CONTACT SETTINGS -->
-<div class="edit-panel" id="ep-contact-settings">
-  <div class="edit-overlay" onclick="closeEditPanel('contact-settings')"></div>
-  <div class="edit-sheet">
-    <div class="edit-sheet-handle"></div>
-    <div class="edit-sheet-header">
-      <div class="edit-sheet-title">⚙️ Pengaturan Kontak</div>
-      <button class="edit-close" onclick="closeEditPanel('contact-settings')">✕</button>
-    </div>
-    <div class="edit-body">
-      <div class="field-group"><label class="field-label">Judul Form</label><input class="field-input" id="cf-title-input" placeholder="Punya pertanyaan atau kolaborasi?"></div>
-      <div class="field-group"><label class="field-label">Email Tujuan</label><input class="field-input" id="cf-email-dest" placeholder="admin@kamuyakin.com"></div>
-      <div class="field-group"><label class="field-label">Pesan Sukses</label><textarea class="field-textarea" id="cf-success-input" placeholder="Terima kasih! Kami akan segera membalas..."></textarea></div>
-      <div class="edit-actions">
-        <button class="edit-cancel" onclick="closeEditPanel('contact-settings')">Batal</button>
-        <button class="edit-save" onclick="saveContactSettings()">💾 Simpan</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
+<div class="ep" id="ep-art"><div class="ep-bg" onclick="closeEp('art')"></div><div class="ep-sheet"><div class="ep-handle"></div><div class="ep-hdr"><div class="ep-title">📝 Tambah Artikel</div><button class="ep-x" onclick="closeEp('art')">✕</button></div><div class="ep-body"><div class="f-grp"><label class="f-lbl">Judul</label><input class="f-inp" id="a-title" placeholder="Judul artikel..."></div><div class="f-2col"><div class="f-grp"><label class="f-lbl">Tag</label><input class="f-inp" id="a-tag" placeholder="🐾 Hewan"></div><div class="f-grp"><label class="f-lbl">Emoji</label><input class="f-inp" id="a-emoji" placeholder="🦈"></div></div><div class="f-grp"><label class="f-lbl">Ringkasan</label><textarea class="f-ta" id="a-excerpt" placeholder="Deskripsi singkat..."></textarea></div><div class="f-grp"><label class="f-lbl">Link YouTube</label><input class="f-inp" id="a-yt" placeholder="https://youtube.com/..."></div><div class="ep-actions"><button class="ep-cancel" onclick="closeEp('art')">Batal</button><button class="ep-save" onclick="saveArt()">💾 Simpan</button></div><div class="divider"></div><div class="ep-sub">📋 Artikel Tersimpan</div><div id="a-list"></div></div></div></div>
+<div class="ep" id="ep-q"><div class="ep-bg" onclick="closeEp('q')"></div><div class="ep-sheet"><div class="ep-handle"></div><div class="ep-hdr"><div class="ep-title">⚙️ Kelola Soal Quiz</div><button class="ep-x" onclick="closeEp('q')">✕</button></div><div class="ep-body"><div class="f-grp"><label class="f-lbl">Pertanyaan</label><textarea class="f-ta" id="q-q" placeholder="Tulis pertanyaan..."></textarea></div><div class="f-2col"><div class="f-grp"><label class="f-lbl">Topik</label><input class="f-inp" id="q-topic" placeholder="🐾 Hewan"></div><div class="f-grp"><label class="f-lbl">Jawaban Benar (0-3)</label><input class="f-inp" id="q-ans" type="number" min="0" max="3" placeholder="1"></div></div><div class="f-grp"><label class="f-lbl">Opsi A</label><input class="f-inp" id="q-a"></div><div class="f-grp"><label class="f-lbl">Opsi B</label><input class="f-inp" id="q-b"></div><div class="f-grp"><label class="f-lbl">Opsi C</label><input class="f-inp" id="q-c"></div><div class="f-grp"><label class="f-lbl">Opsi D</label><input class="f-inp" id="q-d"></div><div class="f-grp"><label class="f-lbl">Penjelasan Fakta</label><textarea class="f-ta" id="q-exp" placeholder="Fakta menarik..."></textarea></div><div class="ep-actions"><button class="ep-cancel" onclick="closeEp('q')">Batal</button><button class="ep-save" onclick="saveQ()">💾 Tambah Soal</button></div><div class="divider"></div><div class="ep-sub">📋 Soal (<span id="q-count">0</span>)</div><div id="q-list"></div></div></div></div>
+<div class="ep" id="ep-v"><div class="ep-bg" onclick="closeEp('v')"></div><div class="ep-sheet"><div class="ep-handle"></div><div class="ep-hdr"><div class="ep-title">🎬 Kelola Video</div><button class="ep-x" onclick="closeEp('v')">✕</button></div><div class="ep-body"><div class="f-grp"><label class="f-lbl">Judul</label><input class="f-inp" id="v-title" placeholder="Judul video..."></div><div class="f-2col"><div class="f-grp"><label class="f-lbl">Emoji</label><input class="f-inp" id="v-emoji" placeholder="🐟"></div><div class="f-grp"><label class="f-lbl">Views</label><input class="f-inp" id="v-views" placeholder="1,2 rb"></div></div><div class="f-grp"><label class="f-lbl">Link YouTube</label><input class="f-inp" id="v-link" placeholder="https://youtube.com/..."></div><div class="ep-actions"><button class="ep-cancel" onclick="closeEp('v')">Batal</button><button class="ep-save" onclick="saveV()">💾 Tambah</button></div><div class="divider"></div><div class="ep-sub">📋 Video</div><div id="v-list"></div></div></div></div>
+<div class="ep" id="ep-lb"><div class="ep-bg" onclick="closeEp('lb')"></div><div class="ep-sheet"><div class="ep-handle"></div><div class="ep-hdr"><div class="ep-title">🏆 Kelola Leaderboard</div><button class="ep-x" onclick="closeEp('lb')">✕</button></div><div class="ep-body"><div class="f-2col"><div class="f-grp"><label class="f-lbl">Nama</label><input class="f-inp" id="lb-name" placeholder="Username..."></div><div class="f-grp"><label class="f-lbl">Poin</label><input class="f-inp" id="lb-pts" type="number" placeholder="500"></div></div><div class="f-grp"><label class="f-lbl">Emoji Avatar</label><input class="f-inp" id="lb-emoji" placeholder="🦈"></div><div class="ep-actions"><button class="ep-cancel" onclick="closeEp('lb')">Batal</button><button class="ep-save" onclick="saveLb()">➕ Tambah</button></div><div class="divider"></div><div id="lb-edit-list"></div></div></div></div>
+<div class="ep" id="ep-sc"><div class="ep-bg" onclick="closeEp('sc')"></div><div class="ep-sheet"><div class="ep-handle"></div><div class="ep-hdr"><div class="ep-title">🌐 Kelola Sosial Media</div><button class="ep-x" onclick="closeEp('sc')">✕</button></div><div class="ep-body"><div class="f-2col"><div class="f-grp"><label class="f-lbl">Platform</label><input class="f-inp" id="sc-name" placeholder="Instagram"></div><div class="f-grp"><label class="f-lbl">Emoji</label><input class="f-inp" id="sc-icon" placeholder="📸"></div></div><div class="f-grp"><label class="f-lbl">Handle</label><input class="f-inp" id="sc-handle" placeholder="@kamuyakin26"></div><div class="f-grp"><label class="f-lbl">Link</label><input class="f-inp" id="sc-link" placeholder="https://..."></div><div class="f-grp"><label class="f-lbl">Warna Hex</label><input class="f-inp" id="sc-color" placeholder="#E1306C"></div><div class="ep-actions"><button class="ep-cancel" onclick="closeEp('sc')">Batal</button><button class="ep-save" onclick="saveSc()">💾 Simpan</button></div><div class="divider"></div><div id="sc-list"></div></div></div></div>
 
 <script>
-// ========================================================
-// ADMIN PASSWORD
-// ========================================================
-const ADMIN_PASSWORD = 'kamuyakin123'; // 👈 Ganti password di sini
-let isAdmin = false;
-let pendingEditId = null;
+var PW = 'kamuyakin123';
+var isAdmin = false;
+var pendingEp = null;
 
-function requestAdmin(editId){
-  pendingEditId = editId || null;
-  document.getElementById('pw-modal').classList.add('open');
-  document.getElementById('pw-input').value='';
-  document.getElementById('pw-error').textContent='';
-  setTimeout(()=>document.getElementById('pw-input').focus(),300);
-}
-function closePwModal(){
-  document.getElementById('pw-modal').classList.remove('open');
-  pendingEditId=null;
-}
-function submitPassword(){
-  const val=document.getElementById('pw-input').value;
-  if(val===ADMIN_PASSWORD){
-    isAdmin=true;
-    document.body.classList.add('admin-mode');
-    document.getElementById('tfn-admin-btn').style.display='none';
-    closePwModal();
-    if(pendingEditId) openEditPanel(pendingEditId);
-  } else {
-    const inp=document.getElementById('pw-input');
-    inp.classList.add('shake');
-    document.getElementById('pw-error').textContent='Password salah! Coba lagi.';
-    inp.value='';
-    setTimeout(()=>inp.classList.remove('shake'),400);
-  }
-}
-function adminLogout(){
-  isAdmin=false;
-  document.body.classList.remove('admin-mode');
-  document.getElementById('tfn-admin-btn').style.display='';
-}
-
-// ========================================================
-// DATA
-// ========================================================
-let ARTICLES = [
-  { id:1, title:"Piranha Bukan Predator Ganas Seperti di Film", tag:"🐾 Hewan", emoji:"🐟", excerpt:"Film Hollywood sering menggambarkan piranha sebagai pembunuh brutal. Tapi fakta di lapangan jauh lebih mengejutkan — piranha justru lebih sering menghindar dari manusia dan lebih sering menjadi mangsa predator lain.", yt:"https://www.youtube.com/@Kamuyakinoffcial", date:"2 Mar 2026" },
-  { id:2, title:"Kukang: Hewan Lucu yang Sebenarnya Berbisa", tag:"🐾 Hewan", emoji:"🦥", excerpt:"Video kukang viral sering bikin orang ingin memeliharanya. Tapi kukang adalah satu-satunya primata berbisa di dunia dan hewan yang sangat dilindungi. Memeliharanya adalah tindakan ilegal yang juga menyiksa hewan ini.", yt:"https://www.youtube.com/@Kamuyakinoffcial", date:"28 Feb 2026" },
-  { id:3, title:"Tempe vs Daging: Siapa Juara Protein?", tag:"🍱 Makanan", emoji:"💪", excerpt:"Tempe mengandung sekitar 19g protein per 100g — mengalahkan banyak jenis daging! Plus bebas kolesterol, kaya serat, dan punya probiotik alami hasil fermentasi. Protein nabati tempe juga sangat mudah dicerna.", yt:"https://www.youtube.com/@Kamuyakinoffcial", date:"25 Feb 2026" },
+var FACTS = [
+  'Cumi-cumi raksasa punya mata sebesar bola basket — terbesar di dunia hewan!',
+  'Kukang adalah satu-satunya primata berbisa di dunia. Gigitannya bisa sebabkan syok anafilaksis!',
+  'Tempe mengandung lebih banyak protein per 100g daripada banyak jenis daging, plus vitamin B12 alami.',
+  'Piranha lebih sering jadi mangsa buaya daripada menyerang makhluk lain.',
+  'Pangolin adalah mamalia paling banyak diperdagangkan ilegal di dunia, padahal sisiknya sama kayak kuku manusia.'
 ];
 
-let QUESTIONS = [
-  { id:1, topic:"🐾 Hewan", q:"Piranha dikenal sebagai predator buas — apakah benar piranha suka menyerang manusia?", options:["Iya, selalu menyerang","Tidak, lebih sering menghindari manusia","Hanya kalau lapar","Tidak pernah menyerang"], answer:1, exp:"Piranha sebenarnya pemalu dan menghindari manusia. Mereka hanya menyerang saat terdesak atau kekurangan makanan." },
-  { id:2, topic:"🌊 Laut", q:"Hiu digambarkan sebagai pemburu manusia di banyak film. Fakta sebenarnya?", options:["Benar, hiu menarget manusia","Salah, hiu jarang menyerang manusia","Menyerang jika pakai baju merah","Semua hiu berbahaya"], answer:1, exp:"Hiu bukan predator manusia! Lebih banyak kematian akibat gigitan anjing daripada serangan hiu. Manusia bukan menu mereka." },
-  { id:3, topic:"🍱 Makanan", q:"Tahu sering dianggap tidak bergizi. Apakah ini benar?", options:["Benar, tidak bergizi","Salah, tahu kaya protein dan nutrisi","Bergizi hanya kalau digoreng","Hanya baik untuk diet"], answer:1, exp:"Tahu mengandung protein lengkap, kalsium, zat besi, dan isoflavon. Sekitar 8-9g protein per 100g — sangat bergizi!" },
-  { id:4, topic:"🌊 Laut", q:"Kraken — monster laut legenda — apakah ada inspirasinya di dunia nyata?", options:["Murni fiksi","Mungkin terinspirasi cumi-cumi raksasa yang nyata ada","Sudah punah 1000 tahun lalu","Nama ilmiah gurita besar"], answer:1, exp:"Legenda Kraken kemungkinan terinspirasi penampakan cumi-cumi raksasa (Architeuthis dux) yang bisa mencapai 13 meter!" },
-  { id:5, topic:"🌿 Alam", q:"Sisik pangolin dipercaya berkhasiat medis. Apa fakta ilmiahnya?", options:["Terbukti menyembuhkan penyakit","Terbuat dari keratin biasa, sama seperti kuku manusia","Mengandung senyawa langka","Sudah terbukti efektif"], answer:1, exp:"Sisik pangolin adalah keratin biasa, sama seperti kuku dan rambut manusia. Tidak ada bukti ilmiah khasiat medisnya!" },
+var ARTS = [
+  {id:1,title:'Piranha Bukan Predator Ganas Seperti di Film',tag:'🐾 Hewan',emoji:'🐟',excerpt:'Film Hollywood sering gambarkan piranha sebagai pembunuh brutal. Faktanya? Piranha justru lebih sering menghindar dari manusia dan lebih sering jadi mangsa predator lain.',yt:'https://www.youtube.com/@Kamuyakinoffcial',date:'2 Mar 2026'},
+  {id:2,title:'Kukang: Hewan Lucu yang Sebenarnya Berbisa',tag:'🐾 Hewan',emoji:'🦥',excerpt:'Video kukang viral bikin banyak orang mau memeliharanya. Tapi kukang adalah satu-satunya primata berbisa di dunia dan hewan yang sangat dilindungi.',yt:'https://www.youtube.com/@Kamuyakinoffcial',date:'28 Feb 2026'},
+  {id:3,title:'Tempe vs Daging: Siapa Juara Protein?',tag:'🍱 Makanan',emoji:'💪',excerpt:'Tempe mengandung sekitar 19g protein per 100g, mengalahkan banyak jenis daging! Plus bebas kolesterol, kaya serat, dan punya probiotik alami.',yt:'https://www.youtube.com/@Kamuyakinoffcial',date:'25 Feb 2026'}
 ];
 
-let VIDEOS = [
-  { id:1, emoji:"🦕", title:"Godzilla Bukan Monster Purba, Tapi Keajaiban Galapagos!", views:"1,1 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
-  { id:2, emoji:"🦑", title:"Kraken isn't just a movie #youtubeshorts #fact", views:"1 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
-  { id:3, emoji:"🥚", title:"Telur Berbahaya, cek faktanya disini", views:"1,1 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
-  { id:4, emoji:"🤔", title:"Tahu GAK bikin kenyang? #youtubeshorts", views:"1,2 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
-  { id:5, emoji:"💪", title:"Protein Wars: Tempe vs Daging!", views:"1,2 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
-  { id:6, emoji:"🐟", title:"Sarden GAK SEHAT? cek faktanya", views:"1 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
-  { id:7, emoji:"🐠", title:"Lele jorok? tunggu dulu #youtubeshorts", views:"1,7 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
-  { id:8, emoji:"🦈", title:"Are sharks really human killers?", views:"1,7 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
+var QS = [
+  {id:1,topic:'🐾 Hewan',q:'Piranha dikenal sebagai predator buas — benarkah piranha suka menyerang manusia?',opts:['Iya, selalu menyerang','Tidak, lebih sering menghindari manusia','Hanya kalau lapar','Tidak pernah menyerang'],ans:1,exp:'Piranha sebenarnya pemalu dan menghindari manusia. Mereka hanya menyerang saat terdesak.'},
+  {id:2,topic:'🌊 Laut',q:'Hiu digambarkan sebagai pemburu manusia di banyak film. Fakta sebenarnya?',opts:['Benar, hiu menarget manusia','Salah, hiu jarang menyerang manusia','Menyerang jika pakai baju merah','Semua hiu berbahaya'],ans:1,exp:'Hiu bukan predator manusia! Lebih banyak kematian akibat gigitan anjing daripada serangan hiu.'},
+  {id:3,topic:'🍱 Makanan',q:'Tahu sering dianggap tidak bergizi. Apakah ini benar?',opts:['Benar, tidak bergizi','Salah, tahu kaya protein dan nutrisi','Bergizi hanya kalau digoreng','Hanya baik untuk diet'],ans:1,exp:'Tahu mengandung protein lengkap, kalsium, zat besi, dan isoflavon. Sekitar 8-9g protein per 100g!'},
+  {id:4,topic:'🌊 Laut',q:'Kraken — monster laut legenda — apakah ada inspirasinya di dunia nyata?',opts:['Murni fiksi','Mungkin terinspirasi cumi-cumi raksasa','Sudah punah 1000 tahun lalu','Nama ilmiah gurita besar'],ans:1,exp:'Legenda Kraken kemungkinan terinspirasi cumi-cumi raksasa (Architeuthis dux) yang bisa mencapai 13 meter!'},
+  {id:5,topic:'🌿 Alam',q:'Sisik pangolin dipercaya berkhasiat medis. Apa fakta ilmiahnya?',opts:['Terbukti menyembuhkan penyakit','Terbuat dari keratin biasa seperti kuku manusia','Mengandung senyawa langka','Sudah terbukti efektif'],ans:1,exp:'Sisik pangolin adalah keratin biasa, sama seperti kuku dan rambut manusia!'}
 ];
 
-let LEADERBOARD = [
-  { name:"RafaelFaktaFan", pts:940, emoji:"🦈" },
-  { name:"ScienceGeekID", pts:885, emoji:"🌿" },
-  { name:"ZoologiKita", pts:820, emoji:"🐾" },
-  { name:"MitosBusters", pts:755, emoji:"🔍" },
-  { name:"NatureLover99", pts:710, emoji:"🌊" },
+var VIDS = [
+  {id:1,emoji:'🦕',title:'Godzilla Bukan Monster Purba!',views:'1,1 rb',link:'https://www.youtube.com/@Kamuyakinoffcial'},
+  {id:2,emoji:'🦑',title:'Kraken bukan cuma di film #shorts',views:'1 rb',link:'https://www.youtube.com/@Kamuyakinoffcial'},
+  {id:3,emoji:'🥚',title:'Telur Berbahaya? Cek faktanya',views:'1,1 rb',link:'https://www.youtube.com/@Kamuyakinoffcial'},
+  {id:4,emoji:'🤔',title:'Tahu GAK bikin kenyang?',views:'1,2 rb',link:'https://www.youtube.com/@Kamuyakinoffcial'},
+  {id:5,emoji:'💪',title:'Protein Wars: Tempe vs Daging!',views:'1,2 rb',link:'https://www.youtube.com/@Kamuyakinoffcial'},
+  {id:6,emoji:'🦈',title:'Are sharks really human killers?',views:'1,7 rb',link:'https://www.youtube.com/@Kamuyakinoffcial'}
 ];
 
-let SOCIALS = [
-  { name:"YouTube", icon:"▶️", handle:"@Kamuyakinoffcial", link:"https://www.youtube.com/@Kamuyakinoffcial", color:"#ff0000" },
-  { name:"Instagram", icon:"📸", handle:"@kamuuyakin26", link:"https://instagram.com/kamuuyakin26", color:"#E1306C" },
-  { name:"TikTok", icon:"🎵", handle:"@kamuyakin", link:"https://tiktok.com", color:"#000000" },
+var LB = [
+  {name:'RafaelFaktaFan',pts:940,emoji:'🦈'},
+  {name:'ScienceGeekID',pts:885,emoji:'🌿'},
+  {name:'ZoologiKita',pts:820,emoji:'🐾'},
+  {name:'MitosBusters',pts:755,emoji:'🔍'},
+  {name:'NatureLover99',pts:710,emoji:'🌊'}
 ];
 
-const DAILY_FACTS = [
-  "Cumi-cumi raksasa punya mata sebesar bola basket — terbesar di dunia hewan — untuk melihat predator di kedalaman laut yang gelap.",
-  "Kukang adalah satu-satunya primata berbisa di dunia. Gigitannya bisa menyebabkan syok anafilaksis yang berbahaya!",
-  "Tempe mengandung lebih banyak protein per 100g daripada banyak jenis daging, plus vitamin B12 yang biasanya hanya ada di produk hewani.",
-  "Piranha di habitatnya lebih sering menjadi mangsa buaya dan burung besar daripada menyerang makhluk lain.",
-  "Pangolin adalah mamalia paling banyak diperdagangkan secara ilegal di dunia, padahal sisiknya sama persis dengan kuku manusia."
+var SCS = [
+  {name:'YouTube',icon:'▶️',handle:'@Kamuyakinoffcial',link:'https://www.youtube.com/@Kamuyakinoffcial',color:'#ff0000'},
+  {name:'Instagram',icon:'📸',handle:'@kamuuyakin26',link:'https://instagram.com/kamuuyakin26',color:'#E1306C'},
+  {name:'TikTok',icon:'🎵',handle:'@kamuyakin',link:'https://tiktok.com',color:'#69C9D0'}
 ];
 
-// Quiz state
-let qQuestions=[], qIdx=0, qScore=0, qAnswered=false;
+var qArr=[], qIdx=0, qScore=0, qDone=false;
 
-// ========================================================
-// INIT
-// ========================================================
-window.addEventListener('load',()=>{
-  document.getElementById('daily-fact').textContent = DAILY_FACTS[Math.floor(Math.random()*DAILY_FACTS.length)];
-  renderArticles(); renderQuizTopics(); renderVideos(); renderLeaderboard(); renderSocials();
-});
+window.onload = function() {
+  document.getElementById('daily-fact').textContent = FACTS[Math.floor(Math.random()*FACTS.length)];
+  document.getElementById('pw-inp').addEventListener('keydown', function(e){ if(e.key==='Enter') submitPw(); });
+  renderArts(); renderTopics(); renderVids(); renderLb(); renderScs();
+};
 
-// ========================================================
-// NAVIGATION
-// ========================================================
-function showPage(p){
-  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
-  document.querySelectorAll('.tfn-btn').forEach(el=>el.classList.remove('active'));
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(function(el){ el.classList.remove('active'); });
+  document.querySelectorAll('.nb').forEach(function(el){ el.classList.remove('active'); });
   document.getElementById('page-'+p).classList.add('active');
-  const tfn=document.getElementById('tfn-'+p); if(tfn) tfn.classList.add('active');
+  var nb = document.getElementById('nb-'+p);
+  if(nb) nb.classList.add('active');
   window.scrollTo(0,0);
 }
 
-// ========================================================
-// EDIT PANELS
-// ========================================================
-function openEditPanel(id){
-  if(!isAdmin){ requestAdmin(id); return; }
-  const ep=document.getElementById('ep-'+id);
-  ep.classList.add('open');
-  if(id==='artikel-add') renderSavedArticlesList();
-  if(id==='quiz-manage') renderSavedQuestionsList();
-  if(id==='video-manage') renderSavedVideosList();
-  if(id==='lb-manage') renderLbEditList();
-  if(id==='social-manage') renderSavedSocialList();
+function openPw(ep) {
+  pendingEp = ep;
+  document.getElementById('pw-modal').classList.add('open');
+  document.getElementById('pw-inp').value='';
+  document.getElementById('pw-err').textContent='';
+  setTimeout(function(){ document.getElementById('pw-inp').focus(); }, 250);
 }
-function closeEditPanel(id){ document.getElementById('ep-'+id).classList.remove('open'); }
+function closePw() {
+  document.getElementById('pw-modal').classList.remove('open');
+  pendingEp = null;
+}
+function submitPw() {
+  var v = document.getElementById('pw-inp').value;
+  if(v === PW) {
+    isAdmin=true;
+    document.body.classList.add('admin-mode');
+    closePw();
+    if(pendingEp) openEp(pendingEp);
+  } else {
+    var i = document.getElementById('pw-inp');
+    i.classList.add('shake');
+    document.getElementById('pw-err').textContent='Password salah, coba lagi!';
+    i.value='';
+    setTimeout(function(){ i.classList.remove('shake'); }, 400);
+  }
+}
+function adminOut() {
+  isAdmin=false;
+  document.body.classList.remove('admin-mode');
+}
 
-// ========================================================
-// RENDER: ARTICLES
-// ========================================================
-function renderArticles(){
-  const c=document.getElementById('articles-container');
-  c.innerHTML='';
-  ARTICLES.forEach(a=>{
-    const d=document.createElement('div');
-    d.className='article-card';
-    d.innerHTML=`
-      <div class="art-meta"><span class="art-tag">${a.tag}</span><span class="art-date">${a.date||''}</span></div>
-      <div class="art-title">${a.emoji} ${a.title}</div>
-      <div class="art-excerpt">${a.excerpt}</div>
-      <div class="art-actions">
-        <a href="${a.yt||'#'}" target="_blank" class="art-read">Baca selengkapnya →</a>
-        <button class="edit-btn" onclick="editArticle(${a.id})" style="margin-left:auto">✏️ Edit</button>
-        <button class="edit-btn danger" onclick="deleteArticle(${a.id})">🗑</button>
-      </div>`;
-    c.appendChild(d);
-  });
+function openEp(id) {
+  if(!isAdmin){ openPw(id); return; }
+  document.getElementById('ep-'+id).classList.add('open');
+  if(id==='art') renderArtList();
+  if(id==='q') renderQList();
+  if(id==='v') renderVList();
+  if(id==='lb') renderLbEdit();
+  if(id==='sc') renderScList();
 }
-function renderSavedArticlesList(){
-  const c=document.getElementById('art-saved-list'); c.innerHTML='';
-  ARTICLES.forEach(a=>{
-    const d=document.createElement('div');
-    d.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)';
-    d.innerHTML=`<span style="font-size:1.3rem">${a.emoji}</span><span style="flex:1;font-size:.85rem;font-weight:700">${a.title}</span><button class="edit-btn danger" onclick="deleteArticle(${a.id});renderSavedArticlesList();renderArticles()">🗑</button>`;
-    c.appendChild(d);
-  });
-}
-function saveArticle(){
-  const title=document.getElementById('art-title-input').value.trim();
-  if(!title){ alert('Judul tidak boleh kosong!'); return; }
-  const now=new Date(); const dateStr=`${now.getDate()} ${['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'][now.getMonth()]} ${now.getFullYear()}`;
-  ARTICLES.unshift({ id:Date.now(), title, tag:document.getElementById('art-tag-input').value||'📌 Umum', emoji:document.getElementById('art-emoji-input').value||'📄', excerpt:document.getElementById('art-excerpt-input').value||'', yt:document.getElementById('art-yt-input').value||'https://www.youtube.com/@Kamuyakinoffcial', date:dateStr });
-  ['art-title-input','art-tag-input','art-emoji-input','art-excerpt-input','art-yt-input'].forEach(id=>document.getElementById(id).value='');
-  renderArticles(); renderSavedArticlesList();
-}
-function editArticle(id){
-  const a=ARTICLES.find(x=>x.id===id); if(!a) return;
-  openEditPanel('artikel-add');
-  document.getElementById('art-title-input').value=a.title;
-  document.getElementById('art-tag-input').value=a.tag;
-  document.getElementById('art-emoji-input').value=a.emoji;
-  document.getElementById('art-excerpt-input').value=a.excerpt;
-  document.getElementById('art-yt-input').value=a.yt||'';
-  deleteArticle(id); renderSavedArticlesList();
-}
-function deleteArticle(id){ ARTICLES=ARTICLES.filter(a=>a.id!==id); renderArticles(); }
+function closeEp(id) { document.getElementById('ep-'+id).classList.remove('open'); }
 
-// ========================================================
-// RENDER: QUIZ TOPICS
-// ========================================================
-function renderQuizTopics(){
-  const topics=[...new Set(QUESTIONS.map(q=>q.topic))];
-  const c=document.getElementById('quiz-topics-list'); c.innerHTML='';
-  const topicEmojis={'🐾 Hewan':'🦁','🌊 Laut':'🦈','🍱 Makanan':'🥢','🌿 Alam':'🌱'};
-  topics.forEach(t=>{
-    const count=QUESTIONS.filter(q=>q.topic===t).length;
-    const d=document.createElement('div');
-    d.className='quiz-item';
-    d.onclick=()=>startQuizByTopic(t);
-    d.innerHTML=`<div class="quiz-item-icon">${topicEmojis[t]||'❓'}</div><div class="quiz-item-info"><div class="quiz-item-title">${t}</div><div class="quiz-item-meta">${count} soal tersedia</div></div><div class="quiz-item-arrow">→</div>`;
+function renderArts() {
+  var c = document.getElementById('art-grid'); c.innerHTML='';
+  ARTS.forEach(function(a) {
+    var d = document.createElement('div'); d.className='art-card';
+    d.innerHTML = '<div class="art-meta"><span class="art-tag">'+a.tag+'</span><span class="art-date">'+a.date+'</span></div>'
+      +'<div class="art-title">'+a.emoji+' '+a.title+'</div>'
+      +'<div class="art-excerpt">'+a.excerpt+'</div>'
+      +'<div class="art-footer">'
+      +'<a href="'+(a.yt||'#')+'" target="_blank" class="art-link">Baca lengkapnya →</a>'
+      +'<button class="edit-btn del" data-id="'+a.id+'" onclick="delArt(this.dataset.id)">🗑</button>'
+      +'</div>';
     c.appendChild(d);
   });
-  // All
-  const all=document.createElement('div'); all.className='quiz-item'; all.onclick=()=>startQuizAll();
-  all.innerHTML=`<div class="quiz-item-icon">🎯</div><div class="quiz-item-info"><div class="quiz-item-title">Semua Topik (Mix)</div><div class="quiz-item-meta">${QUESTIONS.length} soal acak</div></div><div class="quiz-item-arrow">→</div>`;
+}
+function renderArtList() {
+  var c = document.getElementById('a-list'); c.innerHTML='';
+  ARTS.forEach(function(a) {
+    var d = document.createElement('div'); d.className='ep-item';
+    d.innerHTML='<span style="font-size:1.2rem">'+a.emoji+'</span><span style="flex:1;font-size:.8rem;font-weight:600">'+a.title+'</span>'
+      +'<button class="edit-btn del" data-id="'+a.id+'" onclick="delArt(this.dataset.id);renderArtList()">🗑</button>';
+    c.appendChild(d);
+  });
+}
+function saveArt() {
+  var t = document.getElementById('a-title').value.trim();
+  if(!t){ alert('Judul harus diisi!'); return; }
+  var now = new Date();
+  var mo = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  ARTS.unshift({id:Date.now(),title:t,tag:document.getElementById('a-tag').value||'📌 Umum',emoji:document.getElementById('a-emoji').value||'📄',excerpt:document.getElementById('a-excerpt').value||'',yt:document.getElementById('a-yt').value||'https://www.youtube.com/@Kamuyakinoffcial',date:now.getDate()+' '+mo[now.getMonth()]+' '+now.getFullYear()});
+  ['a-title','a-tag','a-emoji','a-excerpt','a-yt'].forEach(function(id){ document.getElementById(id).value=''; });
+  renderArts(); renderArtList();
+}
+function delArt(id) { ARTS=ARTS.filter(function(a){ return a.id!=id; }); renderArts(); }
+
+function renderTopics() {
+  var topics = [];
+  QS.forEach(function(q){ if(topics.indexOf(q.topic)<0) topics.push(q.topic); });
+  var c = document.getElementById('quiz-topics'); c.innerHTML='';
+  var ico = {'🐾 Hewan':'🦁','🌊 Laut':'🦈','🍱 Makanan':'🥢','🌿 Alam':'🌱'};
+  topics.forEach(function(t) {
+    var cnt = QS.filter(function(q){ return q.topic===t; }).length;
+    var d = document.createElement('div'); d.className='qt-card';
+    var tid = t;
+    d.onclick = function(){ startQuiz(tid); };
+    d.innerHTML='<div class="qt-icon">'+(ico[t]||'❓')+'</div><div class="qt-info"><div class="qt-name">'+t+'</div><div class="qt-count">'+cnt+' soal</div></div><div class="qt-arr">→</div>';
+    c.appendChild(d);
+  });
+  var all = document.createElement('div'); all.className='qt-card';
+  all.onclick = startQuizAll;
+  all.innerHTML='<div class="qt-icon">🎯</div><div class="qt-info"><div class="qt-name">Semua Topik (Mix)</div><div class="qt-count">'+QS.length+' soal acak</div></div><div class="qt-arr">→</div>';
   c.appendChild(all);
 }
-function renderSavedQuestionsList(){
-  document.getElementById('q-count').textContent=QUESTIONS.length;
-  const c=document.getElementById('q-saved-list'); c.innerHTML='';
-  QUESTIONS.forEach(q=>{
-    const d=document.createElement('div');
-    d.style.cssText='display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)';
-    d.innerHTML=`<span style="flex:1;font-size:.82rem;font-weight:600;line-height:1.45">${q.topic} · ${q.q.substring(0,60)}...</span><button class="edit-btn danger" onclick="deleteQuestion(${q.id});renderSavedQuestionsList();renderQuizTopics()">🗑</button>`;
+function renderQList() {
+  document.getElementById('q-count').textContent=QS.length;
+  var c=document.getElementById('q-list'); c.innerHTML='';
+  QS.forEach(function(q) {
+    var d=document.createElement('div'); d.className='ep-item';
+    d.innerHTML='<span style="flex:1;font-size:.78rem;line-height:1.4">'+q.topic+' — '+q.q.substring(0,55)+'…</span>'
+      +'<button class="edit-btn del" data-id="'+q.id+'" onclick="delQ(this.dataset.id);renderQList();renderTopics()">🗑</button>';
     c.appendChild(d);
   });
 }
-function saveQuestion(){
-  const q=document.getElementById('q-question-input').value.trim();
-  if(!q){ alert('Pertanyaan tidak boleh kosong!'); return; }
-  QUESTIONS.push({ id:Date.now(), topic:document.getElementById('q-topic-input').value||'❓ Umum', q, options:[document.getElementById('q-a-input').value,document.getElementById('q-b-input').value,document.getElementById('q-c-input').value,document.getElementById('q-d-input').value], answer:parseInt(document.getElementById('q-answer-input').value)||0, exp:document.getElementById('q-exp-input').value||'' });
-  ['q-question-input','q-topic-input','q-a-input','q-b-input','q-c-input','q-d-input','q-exp-input'].forEach(id=>document.getElementById(id).value='');
-  renderSavedQuestionsList(); renderQuizTopics();
+function saveQ() {
+  var q=document.getElementById('q-q').value.trim();
+  if(!q){ alert('Pertanyaan harus diisi!'); return; }
+  QS.push({id:Date.now(),topic:document.getElementById('q-topic').value||'❓ Umum',q:q,opts:[document.getElementById('q-a').value,document.getElementById('q-b').value,document.getElementById('q-c').value,document.getElementById('q-d').value],ans:parseInt(document.getElementById('q-ans').value)||0,exp:document.getElementById('q-exp').value||''});
+  ['q-q','q-topic','q-a','q-b','q-c','q-d','q-exp'].forEach(function(id){ document.getElementById(id).value=''; });
+  renderQList(); renderTopics();
 }
-function deleteQuestion(id){ QUESTIONS=QUESTIONS.filter(q=>q.id!==id); renderQuizTopics(); }
+function delQ(id) { QS=QS.filter(function(q){ return q.id!=id; }); renderTopics(); }
 
-// QUIZ PLAY
-function startQuizByTopic(t){ qQuestions=QUESTIONS.filter(q=>q.topic===t).sort(()=>Math.random()-.5).slice(0,5); startQuizPlay(); }
-function startQuizAll(){ qQuestions=[...QUESTIONS].sort(()=>Math.random()-.5).slice(0,5); startQuizPlay(); }
-function startQuizPlay(){
+function startQuiz(topic) { qArr=QS.filter(function(q){ return q.topic===topic; }).sort(function(){ return Math.random()-.5; }).slice(0,5); playQ(); }
+function startQuizAll() { qArr=QS.slice().sort(function(){ return Math.random()-.5; }).slice(0,5); playQ(); }
+function playQ() {
   qIdx=0; qScore=0;
-  document.getElementById('quiz-list-view').style.display='none';
-  document.getElementById('quiz-play-view').style.display='block';
-  document.getElementById('quiz-result-view').style.display='none';
-  renderQ();
+  document.getElementById('qv-list').style.display='none';
+  document.getElementById('qv-play').style.display='block';
+  document.getElementById('qv-result').style.display='none';
+  showQ();
 }
-function backToQuizList(){
-  document.getElementById('quiz-list-view').style.display='block';
-  document.getElementById('quiz-play-view').style.display='none';
-  document.getElementById('quiz-result-view').style.display='none';
+function backToTopics() {
+  document.getElementById('qv-list').style.display='block';
+  document.getElementById('qv-play').style.display='none';
+  document.getElementById('qv-result').style.display='none';
 }
-function renderQ(){
-  const q=qQuestions[qIdx]; qAnswered=false;
-  document.getElementById('qpf').style.width=((qIdx/qQuestions.length)*100)+'%';
-  document.getElementById('qct').textContent=`Soal ${qIdx+1}/${qQuestions.length}`;
-  document.getElementById('qls').textContent=qScore;
-  document.getElementById('qtt').textContent=q.topic;
-  document.getElementById('qq').textContent=q.q;
-  const opts=document.getElementById('qo'); opts.innerHTML='';
-  const letters=['A','B','C','D'];
-  q.options.forEach((opt,i)=>{
-    const btn=document.createElement('button');
-    btn.className='qopt';
-    btn.innerHTML=`<span class="opt-l">${letters[i]}</span>${opt}`;
-    btn.onclick=()=>selectQ(i,q.answer,q.exp);
-    opts.appendChild(btn);
+function showQ() {
+  var q=qArr[qIdx]; qDone=false;
+  document.getElementById('qpf').style.width=((qIdx/qArr.length)*100)+'%';
+  document.getElementById('qnum').textContent='Soal '+(qIdx+1)+'/'+qArr.length;
+  document.getElementById('qpts').textContent=qScore;
+  document.getElementById('qtopic').textContent=q.topic;
+  document.getElementById('qquestion').textContent=q.q;
+  var c=document.getElementById('qopts'); c.innerHTML='';
+  var L=['A','B','C','D'];
+  q.opts.forEach(function(opt,i) {
+    var b=document.createElement('button'); b.className='q-opt';
+    var li=i;
+    b.onclick=function(){ answerQ(li,q.ans,q.exp); };
+    b.innerHTML='<span class="opt-lbl">'+L[i]+'</span>'+opt;
+    c.appendChild(b);
   });
-  document.getElementById('qe').classList.remove('show');
-  document.getElementById('qnb').classList.remove('show');
-  document.getElementById('qnb').textContent=qIdx<qQuestions.length-1?'Soal Berikutnya →':'Lihat Hasil 🎉';
+  document.getElementById('qexp').className='q-exp';
+  document.getElementById('qnext').className='q-next';
+  document.getElementById('qnext').textContent=qIdx<qArr.length-1?'Soal Berikutnya →':'Lihat Hasil 🎉';
 }
-function selectQ(sel,correct,exp){
-  if(qAnswered) return; qAnswered=true;
-  document.querySelectorAll('.qopt').forEach((b,i)=>{
+function answerQ(sel,ans,exp) {
+  if(qDone) return; qDone=true;
+  var btns=document.querySelectorAll('.q-opt');
+  btns.forEach(function(b,i) {
     b.disabled=true;
-    if(i===correct) b.classList.add('correct');
-    else if(i===sel&&i!==correct) b.classList.add('wrong');
-    b.querySelector('.opt-l').textContent=i===correct?'✓':(i===sel?'✗':['A','B','C','D'][i]);
+    if(i===ans) b.classList.add('correct');
+    else if(i===sel) b.classList.add('wrong');
+    b.querySelector('.opt-lbl').textContent=i===ans?'✓':(i===sel?'✗':['A','B','C','D'][i]);
   });
-  if(sel===correct) qScore+=20;
-  document.getElementById('qet').textContent=exp;
-  document.getElementById('qe').classList.add('show');
-  document.getElementById('qls').textContent=qScore;
-  document.getElementById('qnb').classList.add('show');
+  if(sel===ans) qScore+=20;
+  document.getElementById('qexptext').textContent=exp;
+  document.getElementById('qexp').className='q-exp show';
+  document.getElementById('qpts').textContent=qScore;
+  document.getElementById('qnext').className='q-next show';
 }
-function nextQ(){ qIdx++; if(qIdx>=qQuestions.length) showResult(); else renderQ(); }
-function showResult(){
-  document.getElementById('quiz-play-view').style.display='none';
-  document.getElementById('quiz-result-view').style.display='block';
-  const correct=Math.round(qScore/20), total=qQuestions.length, pct=correct/total;
-  let emoji,lbl,msg;
-  if(pct===1){emoji='🏆';lbl='SEMPURNA!';msg='Master fakta! Share dan tantang teman-temanmu.';}
-  else if(pct>=.8){emoji='🎉';lbl='Keren Banget!';msg='Hampir sempurna! Tonton lebih banyak video untuk unlock fakta seru lainnya.';}
-  else if(pct>=.6){emoji='😄';lbl='Bagus!';msg='Pengetahuanmu oke! Subscribe channel kami untuk belajar lebih banyak.';}
-  else{emoji='😅';lbl='Terus Belajar!';msg='Mitos memang mudah dipercaya! Tonton video-video kami untuk jadi lebih pintar.';}
-  document.getElementById('re').textContent=emoji;
-  document.getElementById('rs').textContent=`${correct}/${total}`;
-  document.getElementById('rl').textContent=lbl;
-  document.getElementById('rm').textContent=msg;
+function nextQ() { qIdx++; if(qIdx>=qArr.length) showResult(); else showQ(); }
+function showResult() {
+  document.getElementById('qv-play').style.display='none';
+  document.getElementById('qv-result').style.display='block';
+  var c=Math.round(qScore/20),t=qArr.length,p=c/t;
+  var e,l,m;
+  if(p===1){e='🏆';l='SEMPURNA!';m='Master fakta! Share dan tantang teman-temanmu ya!';}
+  else if(p>=.8){e='🎉';l='Keren banget!';m='Hampir sempurna! Subscribe channel buat unlock fakta seru lainnya.';}
+  else if(p>=.6){e='😎';l='Lumayan nih!';m='Pengetahuanmu oke! Tonton lebih banyak video biar makin pinter.';}
+  else{e='😅';l='Terus belajar!';m='Mitos memang gampang dipercaya! Tonton video-video kita yuk.';}
+  document.getElementById('res-emoji').textContent=e;
+  document.getElementById('res-score').textContent=c+'/'+t;
+  document.getElementById('res-lbl').textContent=l;
+  document.getElementById('res-msg').textContent=m;
 }
 
-// ========================================================
-// RENDER: VIDEOS
-// ========================================================
-function renderVideos(){
-  const g=document.getElementById('video-grid'); g.innerHTML='';
-  VIDEOS.forEach(v=>{
-    const a=document.createElement('a'); a.className='vcard'; a.href=v.link||'https://www.youtube.com/@Kamuyakinoffcial'; a.target='_blank';
-    a.innerHTML=`<div class="vthumb">${v.emoji}</div><div class="vinfo"><div class="vtitle">${v.title}</div><div class="vviews">👁 ${v.views} ditonton</div></div>`;
+function renderVids() {
+  var g=document.getElementById('vid-grid'); g.innerHTML='';
+  VIDS.forEach(function(v) {
+    var a=document.createElement('a'); a.href=v.link||'https://www.youtube.com/@Kamuyakinoffcial'; a.target='_blank';
+    a.style.cssText='background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;text-decoration:none;display:block;transition:all .2s;';
+    a.onmouseenter=function(){this.style.transform='translateY(-3px)';this.style.borderColor='var(--border2)'};
+    a.onmouseleave=function(){this.style.transform='';this.style.borderColor='var(--border)'};
+    a.innerHTML='<div style="background:var(--bg3);height:100px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;position:relative">'
+      +v.emoji+'<div style="position:absolute;inset:0;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;font-size:1.3rem;color:white" onmouseenter="this.style.opacity=1" onmouseleave="this.style.opacity=0">▶</div></div>'
+      +'<div style="padding:10px 11px"><div style="font-size:.77rem;font-weight:700;line-height:1.4;color:var(--text);margin-bottom:4px">'+v.title+'</div>'
+      +'<div style="font-size:.68rem;color:var(--text3)">👁 '+v.views+'</div></div>';
     g.appendChild(a);
   });
 }
-function renderSavedVideosList(){
-  const c=document.getElementById('v-saved-list'); c.innerHTML='';
-  VIDEOS.forEach(v=>{
-    const d=document.createElement('div'); d.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)';
-    d.innerHTML=`<span style="font-size:1.4rem">${v.emoji}</span><span style="flex:1;font-size:.82rem;font-weight:700">${v.title}</span><button class="edit-btn danger" onclick="deleteVideo(${v.id});renderSavedVideosList();renderVideos()">🗑</button>`;
+function renderVList() {
+  var c=document.getElementById('v-list'); c.innerHTML='';
+  VIDS.forEach(function(v) {
+    var d=document.createElement('div'); d.className='ep-item';
+    d.innerHTML='<span style="font-size:1.2rem">'+v.emoji+'</span><span style="flex:1;font-size:.8rem;font-weight:600">'+v.title+'</span>'
+      +'<button class="edit-btn del" data-id="'+v.id+'" onclick="delV(this.dataset.id);renderVList();renderVids()">🗑</button>';
     c.appendChild(d);
   });
 }
-function saveVideo(){
-  const title=document.getElementById('v-title-input').value.trim();
-  if(!title){ alert('Judul tidak boleh kosong!'); return; }
-  VIDEOS.unshift({ id:Date.now(), title, emoji:document.getElementById('v-emoji-input').value||'🎬', views:document.getElementById('v-views-input').value||'0', link:document.getElementById('v-link-input').value||'https://www.youtube.com/@Kamuyakinoffcial' });
-  ['v-title-input','v-emoji-input','v-views-input','v-link-input'].forEach(id=>document.getElementById(id).value='');
-  renderVideos(); renderSavedVideosList();
+function saveV() {
+  var t=document.getElementById('v-title').value.trim();
+  if(!t){alert('Judul harus diisi!');return;}
+  VIDS.unshift({id:Date.now(),title:t,emoji:document.getElementById('v-emoji').value||'🎬',views:document.getElementById('v-views').value||'0',link:document.getElementById('v-link').value||'https://www.youtube.com/@Kamuyakinoffcial'});
+  ['v-title','v-emoji','v-views','v-link'].forEach(function(id){document.getElementById(id).value='';});
+  renderVids(); renderVList();
 }
-function deleteVideo(id){ VIDEOS=VIDEOS.filter(v=>v.id!==id); renderVideos(); }
+function delV(id){VIDS=VIDS.filter(function(v){return v.id!=id;});renderVids();}
 
-// ========================================================
-// RENDER: LEADERBOARD
-// ========================================================
-function renderLeaderboard(){
-  const sorted=[...LEADERBOARD].sort((a,b)=>b.pts-a.pts);
-  const c=document.getElementById('lb-rows'); c.innerHTML='';
-  const rc=['gold','silver','bronze','',''];
-  const re=['🥇','🥈','🥉','4','5'];
-  sorted.slice(0,10).forEach((p,i)=>{
-    const d=document.createElement('div'); d.className='lb-row';
-    d.innerHTML=`<div class="lb-rank ${rc[i]||''}">${re[i]||i+1}</div><div class="lb-av">${p.emoji}</div><div class="lb-name">${p.name}</div><div class="lb-pts">${p.pts} pts</div>`;
+function renderLb() {
+  var s=LB.slice().sort(function(a,b){return b.pts-a.pts;});
+  var c=document.getElementById('lb-rows'); c.innerHTML='';
+  var rc=['gold','silver','bronze'];
+  var re=['🥇','🥈','🥉'];
+  s.slice(0,10).forEach(function(p,i) {
+    var d=document.createElement('div'); d.className='lb-row';
+    d.innerHTML='<div class="lb-rank '+(rc[i]||'')+'">'+( re[i]||i+1 )+'</div><div class="lb-av">'+p.emoji+'</div><div class="lb-name">'+p.name+'</div><div class="lb-pts">'+p.pts+' pts</div>';
     c.appendChild(d);
   });
 }
-function renderLbEditList(){
-  const c=document.getElementById('lb-edit-list'); c.innerHTML='';
-  [...LEADERBOARD].sort((a,b)=>b.pts-a.pts).forEach(p=>{
-    const d=document.createElement('div'); d.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)';
-    d.innerHTML=`<span>${p.emoji}</span><span style="flex:1;font-size:.85rem;font-weight:700">${p.name}</span><span style="font-weight:800;color:var(--accent);font-size:.85rem">${p.pts}pts</span><button class="edit-btn danger" onclick="removeLbEntry('${p.name}');renderLbEditList();renderLeaderboard()">🗑</button>`;
+function renderLbEdit() {
+  var c=document.getElementById('lb-edit-list'); c.innerHTML='';
+  LB.slice().sort(function(a,b){return b.pts-a.pts;}).forEach(function(p) {
+    var d=document.createElement('div'); d.className='ep-item';
+    d.innerHTML='<span>'+p.emoji+'</span><span style="flex:1;font-size:.83rem;font-weight:700">'+p.name+'</span><span style="color:var(--accent);font-weight:800;font-size:.83rem">'+p.pts+'pts</span>'
+      +'<button class="edit-btn del" data-name="'+p.name+'" onclick="delLb(this.dataset.name);renderLbEdit();renderLb()">🗑</button>';
     c.appendChild(d);
   });
 }
-function addLeaderboardEntry(){
-  const name=document.getElementById('lb-name-input').value.trim();
-  if(!name){ alert('Nama tidak boleh kosong!'); return; }
-  LEADERBOARD.push({ name, pts:parseInt(document.getElementById('lb-pts-input').value)||0, emoji:document.getElementById('lb-emoji-input').value||'🎮' });
-  ['lb-name-input','lb-pts-input','lb-emoji-input'].forEach(id=>document.getElementById(id).value='');
-  renderLeaderboard(); renderLbEditList();
+function saveLb() {
+  var n=document.getElementById('lb-name').value.trim();
+  if(!n){alert('Nama harus diisi!');return;}
+  LB.push({name:n,pts:parseInt(document.getElementById('lb-pts').value)||0,emoji:document.getElementById('lb-emoji').value||'🎮'});
+  ['lb-name','lb-pts','lb-emoji'].forEach(function(id){document.getElementById(id).value='';});
+  renderLb(); renderLbEdit();
 }
-function removeLbEntry(name){ LEADERBOARD=LEADERBOARD.filter(p=>p.name!==name); renderLeaderboard(); }
+function delLb(name){LB=LB.filter(function(p){return p.name!==name;});renderLb();}
 
-// ========================================================
-// RENDER: SOCIALS
-// ========================================================
-function renderSocials(){
-  const g=document.getElementById('social-grid'); g.innerHTML='';
-  SOCIALS.forEach(s=>{
-    const a=document.createElement('a'); a.className='social-card'; a.href=s.link||'#'; a.target='_blank';
+function renderScs() {
+  var g=document.getElementById('social-grid'); g.innerHTML='';
+  SCS.forEach(function(s) {
+    var a=document.createElement('a'); a.className='sc-card'; a.href=s.link||'#'; a.target='_blank';
     a.style.setProperty('--sc-color',s.color||'var(--accent)');
-    a.innerHTML=`<span class="sc-icon">${s.icon}</span><div class="sc-name">${s.name}</div><div class="sc-handle">${s.handle}</div>`;
+    a.innerHTML='<span class="sc-icon">'+s.icon+'</span><div class="sc-name">'+s.name+'</div><div class="sc-handle">'+s.handle+'</div>';
     g.appendChild(a);
   });
 }
-function renderSavedSocialList(){
-  const c=document.getElementById('sc-saved-list'); c.innerHTML='';
-  SOCIALS.forEach((s,i)=>{
-    const d=document.createElement('div'); d.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)';
-    d.innerHTML=`<span style="font-size:1.3rem">${s.icon}</span><div style="flex:1"><div style="font-size:.85rem;font-weight:800">${s.name}</div><div style="font-size:.75rem;color:var(--text-muted)">${s.handle}</div></div><button class="edit-btn danger" onclick="deleteSocial(${i});renderSavedSocialList();renderSocials()">🗑</button>`;
+function renderScList() {
+  var c=document.getElementById('sc-list'); c.innerHTML='';
+  SCS.forEach(function(s,i) {
+    var d=document.createElement('div'); d.className='ep-item';
+    d.innerHTML='<span style="font-size:1.2rem">'+s.icon+'</span><div style="flex:1"><div style="font-size:.82rem;font-weight:800">'+s.name+'</div><div style="font-size:.7rem;color:var(--text3)">'+s.handle+'</div></div>'
+      +'<button class="edit-btn del" data-idx="'+i+'" onclick="delSc(this.dataset.idx);renderScList();renderScs()">🗑</button>';
     c.appendChild(d);
   });
 }
-function saveSocial(){
-  const name=document.getElementById('sc-name-input').value.trim();
-  if(!name){ alert('Nama platform tidak boleh kosong!'); return; }
-  SOCIALS.push({ name, icon:document.getElementById('sc-icon-input').value||'🌐', handle:document.getElementById('sc-handle-input').value||'', link:document.getElementById('sc-link-input').value||'#', color:document.getElementById('sc-color-input').value||'var(--accent)' });
-  ['sc-name-input','sc-icon-input','sc-handle-input','sc-link-input','sc-color-input'].forEach(id=>document.getElementById(id).value='');
-  renderSocials(); renderSavedSocialList();
+function saveSc() {
+  var n=document.getElementById('sc-name').value.trim();
+  if(!n){alert('Nama platform harus diisi!');return;}
+  SCS.push({name:n,icon:document.getElementById('sc-icon').value||'🌐',handle:document.getElementById('sc-handle').value||'',link:document.getElementById('sc-link').value||'#',color:document.getElementById('sc-color').value||'var(--accent)'});
+  ['sc-name','sc-icon','sc-handle','sc-link','sc-color'].forEach(function(id){document.getElementById(id).value='';});
+  renderScs(); renderScList();
 }
-function deleteSocial(i){ SOCIALS.splice(i,1); renderSocials(); }
+function delSc(i){SCS.splice(i,1);renderScs();}
 
-// ========================================================
-// CONTACT FORM
-// ========================================================
-function sendContact(){
-  const name=document.getElementById('cf-name').value.trim();
-  const email=document.getElementById('cf-email').value.trim();
-  const msg=document.getElementById('cf-msg').value.trim();
-  if(!name||!email||!msg){ alert('Nama, email, dan pesan tidak boleh kosong!'); return; }
-  // Simulate send
-  ['cf-name','cf-email','cf-subject','cf-msg'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('cf-success').classList.add('show');
-  setTimeout(()=>document.getElementById('cf-success').classList.remove('show'),4000);
-}
-function saveContactSettings(){
-  const title=document.getElementById('cf-title-input').value.trim();
-  if(title) document.querySelector('.contact-form-title').textContent=title;
-  const suc=document.getElementById('cf-success-input').value.trim();
-  if(suc) document.getElementById('cf-success').innerHTML='✅ '+suc;
-  closeEditPanel('contact-settings');
+function sendMsg() {
+  var n=document.getElementById('cf-name').value.trim();
+  var e=document.getElementById('cf-email').value.trim();
+  var m=document.getElementById('cf-msg').value.trim();
+  if(!n||!e||!m){alert('Nama, email, dan pesan harus diisi!');return;}
+  ['cf-name','cf-email','cf-subj','cf-msg'].forEach(function(id){document.getElementById(id).value='';});
+  var ok=document.getElementById('cf-ok');
+  ok.className='cf-ok show';
+  setTimeout(function(){ok.className='cf-ok';},4000);
 }
 
+// DARK / LIGHT MODE
+function toggleMode() {
+  var isLight = document.body.classList.toggle('light');
+  document.getElementById('mode-icon').textContent = isLight ? '🌙' : '☀️';
+  document.getElementById('mode-label').textContent = isLight ? 'Dark' : 'Light';
+  try { localStorage.setItem('ky-mode', isLight ? 'light' : 'dark'); } catch(e){}
+}
+
+// Load saved mode
+(function() {
+  try {
+    if(localStorage.getItem('ky-mode') === 'light') {
+      document.body.classList.add('light');
+      document.addEventListener('DOMContentLoaded', function() {
+        var icon = document.getElementById('mode-icon');
+        var lbl = document.getElementById('mode-label');
+        if(icon) icon.textContent = '🌙';
+        if(lbl) lbl.textContent = 'Dark';
+      });
+    }
+  } catch(e){}
+})();
+
+</script>
 </body>
 </html>
