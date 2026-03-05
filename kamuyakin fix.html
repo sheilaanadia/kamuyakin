@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kamu Yakin? — Dashboard & App</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f2f6f2;
+  --surface: #ffffff;
+  --surface2: #e6ede6;
+  --card: #ffffff;
+  --accent: #3d9970;
+  --accent-light: rgba(61,153,112,0.1);
+  --accent2: #f4a261;
+  --accent3: #e76f51;
+  --text: #1a2e1a;
+  --text-soft: #4a6641;
+  --text-muted: #7a9b7a;
+  --border: #c8dcc8;
+  --shadow: rgba(61,153,112,0.10);
+  --correct: #2ecc71;
+  --wrong: #e74c3c;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --nav-h: 58px;
+  --top-nav-h: 52px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Nunito',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; background: radial-gradient(ellipse at 15% 10%, rgba(61,153,112,0.07) 0%,transparent 55%), radial-gradient(ellipse at 85% 90%, rgba(244,162,97,0.06) 0%,transparent 55%); pointer-events:none; z-index:0; }
+
+/* ===================== TOP FEATURE NAV ===================== */
+.top-feature-nav {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 20px;
+  height: var(--top-nav-h);
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.top-feature-nav::-webkit-scrollbar { display:none; }
+.tfn-logo {
+  font-family:'Baloo 2',sans-serif; font-size:1.1rem; font-weight:800;
+  color:var(--accent); white-space:nowrap; margin-right:12px;
+  display:flex; align-items:center; gap:6px; flex-shrink:0;
+}
+.tfn-logo-icon { width:28px;height:28px; background:var(--accent); border-radius:8px; display:flex;align-items:center;justify-content:center; font-size:.9rem; }
+.tfn-divider { width:1px; height:22px; background:var(--border); margin:0 6px; flex-shrink:0; }
+.tfn-btn {
+  display:flex; align-items:center; gap:6px;
+  padding:7px 14px; border-radius:50px; border:none; cursor:pointer;
+  font-family:'Nunito',sans-serif; font-size:.82rem; font-weight:700;
+  transition:all .2s; white-space:nowrap; flex-shrink:0;
+  background:transparent; color:var(--text-soft);
+}
+.tfn-btn:hover { background:var(--surface2); }
+.tfn-btn.active { background:var(--accent); color:white; }
+.tfn-btn .tfn-icon { font-size:.95rem; }
+.tfn-yt {
+  margin-left:auto; flex-shrink:0;
+  background:#ff0000; color:white;
+  padding:7px 14px; border-radius:50px; border:none; cursor:pointer;
+  font-family:'Nunito',sans-serif; font-size:.8rem; font-weight:800;
+  text-decoration:none; display:flex;align-items:center;gap:5px;
+  transition:all .2s;
+}
+.tfn-yt:hover { background:#cc0000; transform:translateY(-1px); }
+
+/* ===================== PAGES ===================== */
+.page { display:none; animation:fadeUp .35s ease; }
+.page.active { display:block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+/* ===================== SHARED LAYOUT ===================== */
+.wrap { max-width:740px; margin:0 auto; padding:28px 20px 90px; position:relative; z-index:1; }
+.section-hd { display:flex;align-items:center;justify-content:space-between; margin-bottom:18px; }
+.section-title { font-family:'Baloo 2',sans-serif; font-size:1.2rem; font-weight:800; color:var(--text); display:flex;align-items:center;gap:8px; }
+.badge { display:inline-block; padding:4px 10px; border-radius:50px; font-size:.72rem; font-weight:800; background:var(--surface2); color:var(--text-soft); }
+.badge.green { background:var(--accent-light); color:var(--accent); }
+
+/* ===================== HERO (HOME) ===================== */
+.hero { text-align:center; padding:40px 20px 32px; max-width:620px; margin:0 auto; position:relative; z-index:1; }
+.hero-badge { display:inline-flex;align-items:center;gap:6px; background:var(--surface2); border:1px solid var(--border); padding:5px 13px; border-radius:50px; font-size:.78rem; font-weight:700; color:var(--text-soft); margin-bottom:20px; }
+.hero h1 { font-family:'Baloo 2',sans-serif; font-size:clamp(2rem,6vw,3rem); font-weight:800; line-height:1.2; margin-bottom:14px; }
+.hero h1 span { color:var(--accent); }
+.hero p { font-size:.95rem; color:var(--text-soft); line-height:1.75; margin-bottom:26px; }
+.btn-row { display:flex;gap:10px;justify-content:center;flex-wrap:wrap; }
+.btn { padding:12px 24px; border-radius:50px; border:none; cursor:pointer; font-family:'Nunito',sans-serif; font-size:.92rem; font-weight:800; transition:all .2s; display:inline-flex;align-items:center;gap:7px; text-decoration:none; }
+.btn.green { background:var(--accent); color:white; box-shadow:0 4px 14px rgba(61,153,112,.28); }
+.btn.green:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(61,153,112,.38); }
+.btn.outline { background:transparent; color:var(--text); border:2px solid var(--border); }
+.btn.outline:hover { background:var(--surface); transform:translateY(-2px); }
+.stats-row { display:flex;gap:12px;flex-wrap:wrap; margin-bottom:28px; }
+.stat-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:16px 18px; flex:1; min-width:100px; text-align:center; box-shadow:0 2px 8px var(--shadow); }
+.stat-n { font-family:'Baloo 2',sans-serif; font-size:1.65rem; font-weight:800; color:var(--accent); }
+.stat-l { font-size:.72rem; color:var(--text-muted); font-weight:700; margin-top:2px; }
+
+/* ===================== EDIT PANEL ===================== */
+.edit-panel {
+  position:fixed; inset:0; z-index:900;
+  display:flex; align-items:flex-end; justify-content:center;
+  pointer-events:none; opacity:0; transition:opacity .3s;
+}
+.edit-panel.open { pointer-events:all; opacity:1; }
+.edit-overlay { position:absolute;inset:0; background:rgba(0,0,0,.35); backdrop-filter:blur(3px); }
+.edit-sheet {
+  position:relative; z-index:1;
+  background:var(--card); border-radius:24px 24px 0 0;
+  width:100%; max-width:680px;
+  max-height:88vh; overflow-y:auto;
+  padding:0 0 32px;
+  transform:translateY(100%); transition:transform .35s cubic-bezier(.32,.72,0,1);
+  box-shadow:0 -8px 40px rgba(0,0,0,.15);
+}
+.edit-panel.open .edit-sheet { transform:translateY(0); }
+.edit-sheet-handle { width:40px;height:4px; background:var(--border); border-radius:2px; margin:14px auto 0; }
+.edit-sheet-header { display:flex;align-items:center;justify-content:space-between; padding:16px 24px; border-bottom:1px solid var(--border); }
+.edit-sheet-title { font-family:'Baloo 2',sans-serif; font-size:1.1rem; font-weight:800; }
+.edit-close { background:var(--surface2); border:none; border-radius:50%; width:32px;height:32px; cursor:pointer; font-size:1rem; display:flex;align-items:center;justify-content:center; transition:all .2s; }
+.edit-close:hover { background:var(--border); }
+.edit-body { padding:20px 24px; }
+.field-group { margin-bottom:18px; }
+.field-label { font-size:.8rem; font-weight:800; color:var(--text-soft); margin-bottom:6px; display:block; text-transform:uppercase; letter-spacing:.04em; }
+.field-input, .field-textarea, .field-select {
+  width:100%; padding:11px 14px; border:2px solid var(--border); border-radius:var(--radius-sm);
+  font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:600; color:var(--text);
+  background:var(--surface2); transition:border .2s; outline:none;
+}
+.field-input:focus,.field-textarea:focus,.field-select:focus { border-color:var(--accent); background:white; }
+.field-textarea { resize:vertical; min-height:90px; }
+.field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.edit-actions { display:flex;gap:10px; margin-top:20px; }
+.edit-save { background:var(--accent); color:white; border:none; border-radius:50px; padding:12px 24px; font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:800; cursor:pointer; transition:all .2s; flex:1; }
+.edit-save:hover { background:#2d7a58; }
+.edit-cancel { background:var(--surface2); color:var(--text); border:none; border-radius:50px; padding:12px 24px; font-family:'Nunito',sans-serif; font-size:.9rem; font-weight:800; cursor:pointer; transition:all .2s; }
+.edit-cancel:hover { background:var(--border); }
+.edit-btn { display:inline-flex;align-items:center;gap:5px; padding:6px 12px; border-radius:8px; border:1px solid var(--border); background:var(--surface); cursor:pointer; font-family:'Nunito',sans-serif; font-size:.75rem; font-weight:700; color:var(--text-soft); transition:all .2s; }
+.edit-btn:hover { background:var(--surface2); border-color:var(--accent); color:var(--accent); }
+.edit-btn.danger:hover { background:rgba(231,76,60,.08); border-color:var(--wrong); color:var(--wrong); }
+/* hide edit buttons from guests */
+.edit-btn { display:none; }
+body.admin-mode .edit-btn { display:inline-flex; }
+
+/* ===================== PASSWORD MODAL ===================== */
+.pw-overlay { position:fixed;inset:0;z-index:999; background:rgba(0,0,0,0.45); backdrop-filter:blur(6px); display:flex;align-items:center;justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s; }
+.pw-overlay.open { opacity:1; pointer-events:all; }
+.pw-box { background:var(--card); border-radius:20px; padding:32px 28px; width:100%; max-width:340px; box-shadow:0 12px 40px rgba(0,0,0,.18); text-align:center; transform:translateY(16px); transition:transform .3s; }
+.pw-overlay.open .pw-box { transform:translateY(0); }
+.pw-icon { font-size:2.4rem; margin-bottom:12px; display:block; }
+.pw-title { font-family:'Baloo 2',sans-serif; font-size:1.2rem; font-weight:800; margin-bottom:6px; }
+.pw-sub { font-size:.82rem; color:var(--text-muted); font-weight:600; margin-bottom:20px; }
+.pw-input { width:100%; padding:12px 14px; border:2px solid var(--border); border-radius:10px; font-family:'Nunito',sans-serif; font-size:1rem; font-weight:700; text-align:center; letter-spacing:.18em; outline:none; transition:border .2s; background:var(--surface2); }
+.pw-input:focus { border-color:var(--accent); background:white; }
+.pw-input.shake { animation:shake .4s; border-color:var(--wrong); }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
+.pw-error { font-size:.78rem; color:var(--wrong); font-weight:700; margin-top:8px; min-height:18px; }
+.pw-actions { display:flex;gap:10px;margin-top:16px; }
+.pw-submit { flex:1; background:var(--accent); color:white; border:none; border-radius:50px; padding:12px; font-family:'Nunito',sans-serif; font-size:.92rem; font-weight:800; cursor:pointer; transition:all .2s; }
+.pw-submit:hover { background:#2d7a58; }
+.pw-cancel { background:var(--surface2); color:var(--text); border:none; border-radius:50px; padding:12px 18px; font-family:'Nunito',sans-serif; font-size:.92rem; font-weight:800; cursor:pointer; transition:all .2s; }
+.pw-cancel:hover { background:var(--border); }
+
+/* Admin badge in nav */
+.admin-badge { display:none; align-items:center;gap:5px; padding:5px 11px; border-radius:50px; background:rgba(61,153,112,.15); color:var(--accent); font-size:.75rem; font-weight:800; border:1px solid rgba(61,153,112,.3); }
+body.admin-mode .admin-badge { display:flex; }
+.admin-logout { cursor:pointer; opacity:.7; transition:opacity .2s; }
+.admin-logout:hover { opacity:1; }
+.add-btn { width:100%; padding:12px; border:2px dashed var(--border); background:transparent; border-radius:var(--radius-sm); cursor:pointer; font-family:'Nunito',sans-serif; font-size:.88rem; font-weight:700; color:var(--text-muted); transition:all .2s; display:flex;align-items:center;justify-content:center;gap:6px; }
+.add-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-light); }
+
+/* ===================== ARTICLES ===================== */
+.articles-grid { display:grid; gap:14px; }
+.article-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; box-shadow:0 2px 8px var(--shadow); position:relative; transition:all .2s; }
+.article-card:hover { transform:translateY(-2px); box-shadow:0 5px 16px var(--shadow); }
+.art-meta { display:flex;align-items:center;gap:8px; margin-bottom:10px; }
+.art-tag { padding:3px 10px; border-radius:50px; font-size:.7rem; font-weight:800; background:var(--accent-light); color:var(--accent); }
+.art-date { font-size:.72rem; color:var(--text-muted); font-weight:600; }
+.art-title { font-family:'Baloo 2',sans-serif; font-size:1.05rem; font-weight:700; line-height:1.4; margin-bottom:8px; color:var(--text); }
+.art-excerpt { font-size:.84rem; color:var(--text-soft); line-height:1.65; }
+.art-actions { display:flex;gap:8px; margin-top:14px; }
+.art-read { display:inline-flex;align-items:center;gap:5px; font-size:.78rem; font-weight:800; color:var(--accent); text-decoration:none; transition:gap .2s; }
+.art-read:hover { gap:8px; }
+
+/* ===================== QUIZ ===================== */
+.quiz-list { display:grid;gap:12px; }
+.quiz-item { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px; display:flex;align-items:center;gap:14px; cursor:pointer; transition:all .2s; box-shadow:0 2px 8px var(--shadow); }
+.quiz-item:hover { transform:translateX(4px); border-color:var(--accent); }
+.quiz-item-icon { font-size:1.8rem; flex-shrink:0; }
+.quiz-item-info { flex:1; }
+.quiz-item-title { font-weight:800; font-size:.95rem; margin-bottom:3px; }
+.quiz-item-meta { font-size:.75rem; color:var(--text-muted); font-weight:600; }
+.quiz-item-arrow { color:var(--text-muted); font-size:1.1rem; }
+/* In-page quiz */
+.qcard { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:28px; box-shadow:0 4px 20px var(--shadow); }
+.qprog { height:5px; background:var(--border); border-radius:3px; margin-bottom:24px; overflow:hidden; }
+.qprog-fill { height:100%; background:var(--accent); border-radius:3px; transition:width .4s; }
+.qmeta { display:flex;align-items:center;justify-content:space-between; margin-bottom:20px; }
+.qcount { font-size:.8rem; font-weight:700; color:var(--text-muted); }
+.qscore { background:var(--accent-light); padding:5px 12px; border-radius:50px; font-size:.8rem; font-weight:800; color:var(--accent); }
+.qtag { display:inline-flex;align-items:center;gap:5px; padding:4px 11px; border-radius:50px; background:var(--surface2); color:var(--text-soft); font-size:.76rem; font-weight:700; margin-bottom:14px; }
+.qquestion { font-family:'Baloo 2',sans-serif; font-size:1.25rem; font-weight:700; line-height:1.45; margin-bottom:20px; }
+.qopts { display:grid;gap:9px; }
+.qopt { background:var(--surface2); border:2px solid var(--border); border-radius:10px; padding:13px 16px; cursor:pointer; font-family:'Nunito',sans-serif; font-size:.92rem; font-weight:700; text-align:left; width:100%; transition:all .2s; color:var(--text); display:flex;align-items:center;gap:11px; }
+.qopt:hover:not(:disabled) { background:var(--accent-light); border-color:var(--accent); transform:translateX(4px); }
+.qopt.correct { background:rgba(46,204,113,.1); border-color:var(--correct); color:#1a7a40; }
+.qopt.wrong { background:rgba(231,76,60,.1); border-color:var(--wrong); color:#922b21; }
+.qopt:disabled { cursor:default; }
+.opt-l { width:26px;height:26px; border-radius:7px; background:var(--border); color:var(--text-soft); display:flex;align-items:center;justify-content:center; font-size:.76rem; font-weight:800; flex-shrink:0; transition:all .2s; }
+.qopt.correct .opt-l { background:var(--correct); color:white; }
+.qopt.wrong .opt-l { background:var(--wrong); color:white; }
+.qexp { background:var(--surface2); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:10px; padding:14px; margin-top:14px; font-size:.85rem; line-height:1.65; color:var(--text-soft); display:none; }
+.qexp.show { display:block; animation:fadeUp .3s; }
+.yt-link { display:inline-flex;align-items:center;gap:5px; margin-top:8px; background:#ff0000; color:white; padding:7px 13px; border-radius:7px; font-size:.78rem; font-weight:800; text-decoration:none; transition:all .2s; }
+.yt-link:hover { background:#cc0000; transform:translateY(-1px); }
+.qnext { width:100%; padding:13px; background:var(--accent); color:white; border:none; border-radius:10px; font-family:'Nunito',sans-serif; font-size:.95rem; font-weight:800; cursor:pointer; transition:all .2s; margin-top:10px; display:none; }
+.qnext.show { display:block; }
+.qnext:hover { background:#2d7a58; }
+/* Result */
+.result-box { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:36px 28px; text-align:center; box-shadow:0 4px 20px var(--shadow); }
+.res-emoji { font-size:3.5rem; display:block; margin-bottom:14px; }
+.res-big { font-family:'Baloo 2',sans-serif; font-size:3rem; font-weight:800; color:var(--accent); }
+.res-lbl { font-size:1.05rem; font-weight:700; margin:6px 0; }
+.res-msg { font-size:.88rem; color:var(--text-soft); line-height:1.65; margin-bottom:24px; }
+
+/* ===================== EXPLORE ===================== */
+.video-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:14px; }
+.vcard { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; cursor:pointer; transition:all .2s; box-shadow:0 2px 8px var(--shadow); text-decoration:none; display:block; }
+.vcard:hover { transform:translateY(-3px); box-shadow:0 6px 18px var(--shadow); }
+.vthumb { background:var(--surface2); height:110px; display:flex;align-items:center;justify-content:center; font-size:2.6rem; position:relative; overflow:hidden; }
+.vthumb::after { content:'▶'; position:absolute;inset:0; background:rgba(0,0,0,.25); display:flex;align-items:center;justify-content:center; color:white; font-size:1.5rem; opacity:0; transition:opacity .2s; }
+.vcard:hover .vthumb::after { opacity:1; }
+.vinfo { padding:11px 12px; }
+.vtitle { font-size:.8rem; font-weight:700; line-height:1.4; color:var(--text); margin-bottom:5px; }
+.vviews { font-size:.7rem; color:var(--text-muted); font-weight:600; }
+
+/* ===================== COMMUNITY ===================== */
+.lb-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:0 2px 10px var(--shadow); margin-bottom:20px; }
+.lb-head { background:var(--accent); color:white; padding:14px 18px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:.95rem; display:flex;align-items:center;gap:8px; }
+.lb-row { display:flex;align-items:center;gap:12px; padding:13px 18px; border-bottom:1px solid var(--border); transition:background .2s; }
+.lb-row:last-child { border-bottom:none; }
+.lb-row:hover { background:var(--surface2); }
+.lb-rank { font-family:'Baloo 2',sans-serif; font-size:1rem; font-weight:800; width:26px; text-align:center; color:var(--text-muted); }
+.lb-rank.gold { color:#f1c40f; }
+.lb-rank.silver { color:#95a5a6; }
+.lb-rank.bronze { color:#cd6133; }
+.lb-av { width:34px;height:34px; border-radius:50%; background:var(--surface2); border:2px solid var(--border); display:flex;align-items:center;justify-content:center; font-size:1rem; }
+.lb-name { flex:1; font-weight:700; font-size:.88rem; }
+.lb-pts { font-family:'Baloo 2',sans-serif; font-weight:800; font-size:.9rem; color:var(--accent); }
+
+/* ===================== CONTACT / SOCIAL ===================== */
+.contact-grid { display:grid; gap:14px; }
+.social-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin-bottom:20px; }
+.social-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px 14px; text-align:center; text-decoration:none; transition:all .2s; box-shadow:0 2px 8px var(--shadow); position:relative; overflow:hidden; }
+.social-card::before { content:''; position:absolute;top:0;left:0;right:0;height:3px; background:var(--sc-color,var(--accent)); }
+.social-card:hover { transform:translateY(-3px); box-shadow:0 6px 18px var(--shadow); }
+.sc-icon { font-size:2rem; margin-bottom:8px; display:block; }
+.sc-name { font-weight:800; font-size:.85rem; color:var(--text); margin-bottom:3px; }
+.sc-handle { font-size:.74rem; color:var(--text-muted); font-weight:600; }
+.contact-form-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:24px; box-shadow:0 2px 8px var(--shadow); }
+.contact-form-title { font-family:'Baloo 2',sans-serif; font-weight:800; font-size:1.05rem; margin-bottom:18px; }
+.form-row { display:grid;grid-template-columns:1fr 1fr; gap:12px; }
+@media(max-width:480px){ .form-row { grid-template-columns:1fr; } }
+.cf-input,.cf-textarea { width:100%; padding:11px 13px; border:2px solid var(--border); border-radius:var(--radius-sm); font-family:'Nunito',sans-serif; font-size:.88rem; font-weight:600; color:var(--text); background:var(--surface2); outline:none; transition:border .2s; }
+.cf-input:focus,.cf-textarea:focus { border-color:var(--accent); background:white; }
+.cf-textarea { resize:vertical; min-height:100px; }
+.cf-label { font-size:.76rem; font-weight:800; color:var(--text-soft); margin-bottom:5px; display:block; text-transform:uppercase; letter-spacing:.04em; }
+.cf-group { margin-bottom:14px; }
+.cf-send { background:var(--accent); color:white; border:none; border-radius:50px; padding:12px 28px; font-family:'Nunito',sans-serif; font-size:.92rem; font-weight:800; cursor:pointer; transition:all .2s; display:flex;align-items:center;gap:7px; }
+.cf-send:hover { background:#2d7a58; transform:translateY(-1px); }
+.success-msg { background:rgba(46,204,113,.1); border:1px solid var(--correct); border-radius:10px; padding:13px 16px; font-size:.85rem; font-weight:700; color:#1a7a40; display:none;align-items:center;gap:8px; margin-top:12px; }
+.success-msg.show { display:flex; animation:fadeUp .3s; }
+
+/* ===================== EMAIL INFO CARD ===================== */
+.email-info-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 4px solid var(--accent); border-radius: var(--radius);
+  padding: 16px 18px; margin-bottom: 16px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+.email-info-row { display:flex; align-items:center; gap:14px; margin-bottom:10px; }
+.email-info-icon { font-size:1.8rem; flex-shrink:0; }
+.email-info-body { flex:1; }
+.email-info-label { font-size:.72rem; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:3px; }
+.email-info-addr {
+  font-family:'Baloo 2',sans-serif; font-size:1rem; font-weight:700;
+  color:var(--accent); text-decoration:none; word-break:break-all;
+  transition: opacity .2s;
+}
+.email-info-addr:hover { opacity:.75; text-decoration:underline; }
+.email-info-note { font-size:.78rem; color:var(--text-muted); font-weight:600; padding-top:10px; border-top:1px solid var(--border); }
+.fact-card { background:var(--card); border:1px solid var(--border); border-left:4px solid var(--accent2); border-radius:var(--radius); padding:20px; box-shadow:0 2px 8px var(--shadow); }
+.fact-lbl { font-size:.72rem; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px; }
+.fact-txt { font-size:.93rem; line-height:1.7; color:var(--text); font-weight:600; }
+
+
+
+/* ===================== MISC ===================== */
+.spacer { height:32px; }
+.divider { height:1px; background:var(--border); margin:20px 0; }
+.chip { display:inline-flex;align-items:center;gap:5px; padding:4px 10px; border-radius:50px; background:var(--surface2); color:var(--text-soft); font-size:.72rem; font-weight:700; }
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+</style>
+</head>
+<body>
+
+<!-- ========== TOP FEATURE NAV ========== -->
+<div class="top-feature-nav">
+  <div class="tfn-logo">
+    <div class="tfn-logo-icon">❓</div>
+    Kamu Yakin
+  </div>
+  <div class="tfn-divider"></div>
+  <button class="tfn-btn active" id="tfn-home" onclick="showPage('home')"><span class="tfn-icon">🏠</span> Home</button>
+  <button class="tfn-btn" id="tfn-artikel" onclick="showPage('artikel')"><span class="tfn-icon">📝</span> Artikel</button>
+  <button class="tfn-btn" id="tfn-quiz" onclick="showPage('quiz')"><span class="tfn-icon">🎮</span> Quiz</button>
+  <button class="tfn-btn" id="tfn-jelajahi" onclick="showPage('jelajahi')"><span class="tfn-icon">🔍</span> Jelajahi</button>
+  <button class="tfn-btn" id="tfn-komunitas" onclick="showPage('komunitas')"><span class="tfn-icon">👥</span> Komunitas</button>
+  <button class="tfn-btn" id="tfn-kontak" onclick="showPage('kontak')"><span class="tfn-icon">📬</span> Kontak</button>
+  <div class="admin-badge">🔓 Admin <span class="admin-logout" onclick="adminLogout()" title="Keluar mode admin">✕</span></div>
+  <button class="tfn-btn" onclick="requestAdmin()" id="tfn-admin-btn" style="flex-shrink:0" title="Login Admin">🔒</button>
+  <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="tfn-yt">▶ YouTube</a>
+</div>
+
+<!-- ========== PASSWORD MODAL ========== -->
+<div class="pw-overlay" id="pw-modal">
+  <div class="pw-box">
+    <span class="pw-icon">🔐</span>
+    <div class="pw-title">Mode Admin</div>
+    <div class="pw-sub">Masukkan password untuk mengakses fitur edit</div>
+    <input class="pw-input" id="pw-input" type="password" placeholder="••••••••" maxlength="20" onkeydown="if(event.key==='Enter')submitPassword()">
+    <div class="pw-error" id="pw-error"></div>
+    <div class="pw-actions">
+      <button class="pw-cancel" onclick="closePwModal()">Batal</button>
+      <button class="pw-submit" onclick="submitPassword()">🔓 Masuk</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- HOME -->
+<!-- ================================================================ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-badge">🎯 Mitos vs Fakta · Channel YouTube</div>
+    <h1>Kamu <span>Yakin</span><br>Tahu Faktanya?</h1>
+    <p>Belajar fakta seru tentang hewan, alam, dan makanan sambil bermain quiz. Dari channel yang bikin kamu bilang <em>"Wah, beneran?!"</em></p>
+    <div class="btn-row">
+      <button class="btn green" onclick="showPage('quiz')">🎮 Main Quiz</button>
+      <button class="btn outline" onclick="showPage('artikel')">📝 Baca Artikel</button>
+    </div>
+  </div>
+  <div class="wrap" style="padding-top:0">
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-n">20+</div><div class="stat-l">Video</div></div>
+      <div class="stat-card"><div class="stat-n">81</div><div class="stat-l">Subscriber</div></div>
+      <div class="stat-card"><div class="stat-n">10+</div><div class="stat-l">Quiz</div></div>
+      <div class="stat-card"><div class="stat-n">∞</div><div class="stat-l">Fakta Seru</div></div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-lbl">🌟 Fakta Hari Ini</div>
+      <div class="fact-txt" id="daily-fact">Memuat fakta seru...</div>
+      <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="yt-link" style="margin-top:12px">▶ Tonton Video</a>
+    </div>
+  </div>
+  <div class="spacer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- ARTIKEL -->
+<!-- ================================================================ -->
+<div class="page" id="page-artikel">
+  <div class="wrap">
+    <div class="section-hd">
+      <div class="section-title">📝 Artikel Fakta</div>
+      <button class="edit-btn" onclick="openEditPanel('artikel-add')">✏️ Tambah Artikel</button>
+    </div>
+    <div class="articles-grid" id="articles-container"></div>
+  </div>
+  <div class="spacer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- QUIZ -->
+<!-- ================================================================ -->
+<div class="page" id="page-quiz">
+  <div class="wrap">
+    <!-- List mode -->
+    <div id="quiz-list-view">
+      <div class="section-hd">
+        <div class="section-title">🎮 Pilih Quiz</div>
+        <button class="edit-btn" onclick="openEditPanel('quiz-manage')">⚙️ Kelola Soal</button>
+      </div>
+      <div class="quiz-list" id="quiz-topics-list"></div>
+    </div>
+    <!-- Play mode -->
+    <div id="quiz-play-view" style="display:none">
+      <button class="edit-btn" onclick="backToQuizList()" style="margin-bottom:18px">← Kembali</button>
+      <div class="qcard">
+        <div class="qprog"><div class="qprog-fill" id="qpf"></div></div>
+        <div class="qmeta">
+          <div class="qcount" id="qct">Soal 1/5</div>
+          <div class="qscore">⭐ <span id="qls">0</span> pts</div>
+        </div>
+        <div class="qtag" id="qtt">🐾 Hewan</div>
+        <div class="qquestion" id="qq">...</div>
+        <div class="qopts" id="qo"></div>
+        <div class="qexp" id="qe"><strong>💡 Fakta:</strong> <span id="qet"></span><br><br><a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="yt-link">▶ Tonton di YouTube</a></div>
+      </div>
+      <button class="qnext" id="qnb" onclick="nextQ()">Soal Berikutnya →</button>
+    </div>
+    <!-- Result mode -->
+    <div id="quiz-result-view" style="display:none">
+      <div class="result-box">
+        <span class="res-emoji" id="re">🎉</span>
+        <div class="res-big" id="rs">4/5</div>
+        <div class="res-lbl" id="rl">Keren!</div>
+        <div class="res-msg" id="rm">Kamu luar biasa!</div>
+        <div class="btn-row" style="margin-top:0">
+          <button class="btn green" onclick="backToQuizList()">🔄 Main Lagi</button>
+          <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="btn outline">▶ YouTube</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- JELAJAHI -->
+<!-- ================================================================ -->
+<div class="page" id="page-jelajahi">
+  <div class="wrap">
+    <div class="section-hd">
+      <div class="section-title">🔍 Jelajahi Video</div>
+      <button class="edit-btn" onclick="openEditPanel('video-manage')">✏️ Edit Video</button>
+    </div>
+    <div class="video-grid" id="video-grid"></div>
+  </div>
+  <div class="spacer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- KOMUNITAS -->
+<!-- ================================================================ -->
+<div class="page" id="page-komunitas">
+  <div class="wrap">
+    <div class="section-hd">
+      <div class="section-title">🏆 Leaderboard</div>
+      <button class="edit-btn" onclick="openEditPanel('lb-manage')">✏️ Edit Pemain</button>
+    </div>
+    <div class="lb-card">
+      <div class="lb-head">🥇 Top Pemain Minggu Ini</div>
+      <div id="lb-rows"></div>
+    </div>
+    <div class="section-hd">
+      <div class="section-title">📣 Bergabung</div>
+    </div>
+    <div class="fact-card" style="border-left-color:var(--accent)">
+      <div class="fact-lbl">🤝 Komunitas Kamu Yakin</div>
+      <div class="fact-txt">Share skor quiz kamu dan tantang teman! Subscribe channel kami untuk soal baru setiap minggu.</div>
+      <a href="https://www.youtube.com/@Kamuyakinoffcial" target="_blank" class="yt-link" style="margin-top:12px">🔔 Subscribe Sekarang</a>
+    </div>
+  </div>
+  <div class="spacer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- KONTAK & SOSIAL MEDIA -->
+<!-- ================================================================ -->
+<div class="page" id="page-kontak">
+  <div class="wrap">
+    <!-- Social Media -->
+    <div class="section-hd">
+      <div class="section-title">🌐 Media Sosial</div>
+      <button class="edit-btn" onclick="openEditPanel('social-manage')">✏️ Edit Sosmed</button>
+    </div>
+    <div class="social-grid" id="social-grid"></div>
+
+    <div class="divider"></div>
+
+    <!-- Contact Form -->
+    <div class="section-hd">
+      <div class="section-title">📬 Hubungi Kami</div>
+      <button class="edit-btn" onclick="openEditPanel('contact-settings')">⚙️ Pengaturan</button>
+    </div>
+
+    <!-- Email Info Card -->
+    <div class="email-info-card">
+      <div class="email-info-row">
+        <div class="email-info-icon">✉️</div>
+        <div class="email-info-body">
+          <div class="email-info-label">Email Langsung</div>
+          <a class="email-info-addr" id="contact-email-addr" href="mailto:kamuyakin@gmail.com">kamuyakin@gmail.com</a>
+        </div>
+        <button class="edit-btn" onclick="openEditPanel('contact-settings')" style="flex-shrink:0">✏️ Ubah</button>
+      </div>
+      <div class="email-info-note">💬 Balasan dalam 1–2 hari kerja · Kolaborasi & kerjasama welcome!</div>
+    </div>
+
+    <div class="contact-form-card">
+      <div class="contact-form-title">Punya pertanyaan, kolaborasi, atau saran?</div>
+      <div class="form-row">
+        <div class="cf-group"><label class="cf-label">Nama</label><input class="cf-input" id="cf-name" placeholder="Nama kamu..."></div>
+        <div class="cf-group"><label class="cf-label">Email</label><input class="cf-input" id="cf-email" placeholder="email@contoh.com"></div>
+      </div>
+      <div class="cf-group"><label class="cf-label">Subjek</label><input class="cf-input" id="cf-subject" placeholder="Tentang apa?"></div>
+      <div class="cf-group"><label class="cf-label">Pesan</label><textarea class="cf-textarea" id="cf-msg" placeholder="Tulis pesanmu di sini..."></textarea></div>
+      <button class="cf-send" onclick="sendContact()">📩 Kirim Pesan</button>
+      <div class="success-msg" id="cf-success">✅ Pesan terkirim! Kami akan membalasnya segera.</div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- EDIT PANELS -->
+<!-- ================================================================ -->
+
+<!-- ARTIKEL ADD/EDIT -->
+<div class="edit-panel" id="ep-artikel-add">
+  <div class="edit-overlay" onclick="closeEditPanel('artikel-add')"></div>
+  <div class="edit-sheet">
+    <div class="edit-sheet-handle"></div>
+    <div class="edit-sheet-header">
+      <div class="edit-sheet-title">✏️ Tambah / Edit Artikel</div>
+      <button class="edit-close" onclick="closeEditPanel('artikel-add')">✕</button>
+    </div>
+    <div class="edit-body">
+      <div class="field-group"><label class="field-label">Judul Artikel</label><input class="field-input" id="art-title-input" placeholder="Contoh: Fakta Mengejutkan tentang Piranha..."></div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Topik / Tag</label><input class="field-input" id="art-tag-input" placeholder="🐾 Hewan"></div>
+        <div class="field-group"><label class="field-label">Emoji</label><input class="field-input" id="art-emoji-input" placeholder="🦈"></div>
+      </div>
+      <div class="field-group"><label class="field-label">Ringkasan (excerpt)</label><textarea class="field-textarea" id="art-excerpt-input" placeholder="Deskripsi singkat artikel..."></textarea></div>
+      <div class="field-group"><label class="field-label">Link YouTube (opsional)</label><input class="field-input" id="art-yt-input" placeholder="https://youtube.com/..."></div>
+      <div class="edit-actions">
+        <button class="edit-cancel" onclick="closeEditPanel('artikel-add')">Batal</button>
+        <button class="edit-save" onclick="saveArticle()">💾 Simpan Artikel</button>
+      </div>
+      <div class="divider"></div>
+      <div class="section-title" style="font-size:.95rem;margin-bottom:14px">📋 Artikel Tersimpan</div>
+      <div id="art-saved-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ MANAGE -->
+<div class="edit-panel" id="ep-quiz-manage">
+  <div class="edit-overlay" onclick="closeEditPanel('quiz-manage')"></div>
+  <div class="edit-sheet">
+    <div class="edit-sheet-handle"></div>
+    <div class="edit-sheet-header">
+      <div class="edit-sheet-title">⚙️ Kelola Soal Quiz</div>
+      <button class="edit-close" onclick="closeEditPanel('quiz-manage')">✕</button>
+    </div>
+    <div class="edit-body">
+      <div class="field-group"><label class="field-label">Pertanyaan</label><textarea class="field-textarea" id="q-question-input" placeholder="Tulis pertanyaan quiz..."></textarea></div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Topik</label><input class="field-input" id="q-topic-input" placeholder="🐾 Hewan"></div>
+        <div class="field-group"><label class="field-label">Jawaban Benar (0–3)</label><input class="field-input" id="q-answer-input" type="number" min="0" max="3" placeholder="1"></div>
+      </div>
+      <div class="field-group"><label class="field-label">Opsi A</label><input class="field-input" id="q-a-input" placeholder="Jawaban A"></div>
+      <div class="field-group"><label class="field-label">Opsi B</label><input class="field-input" id="q-b-input" placeholder="Jawaban B"></div>
+      <div class="field-group"><label class="field-label">Opsi C</label><input class="field-input" id="q-c-input" placeholder="Jawaban C"></div>
+      <div class="field-group"><label class="field-label">Opsi D</label><input class="field-input" id="q-d-input" placeholder="Jawaban D"></div>
+      <div class="field-group"><label class="field-label">Penjelasan Fakta</label><textarea class="field-textarea" id="q-exp-input" placeholder="Jelaskan fakta di balik soal ini..."></textarea></div>
+      <div class="edit-actions">
+        <button class="edit-cancel" onclick="closeEditPanel('quiz-manage')">Batal</button>
+        <button class="edit-save" onclick="saveQuestion()">💾 Tambah Soal</button>
+      </div>
+      <div class="divider"></div>
+      <div class="section-title" style="font-size:.95rem;margin-bottom:14px">📋 Soal Tersimpan (<span id="q-count">0</span>)</div>
+      <div id="q-saved-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO MANAGE -->
+<div class="edit-panel" id="ep-video-manage">
+  <div class="edit-overlay" onclick="closeEditPanel('video-manage')"></div>
+  <div class="edit-sheet">
+    <div class="edit-sheet-handle"></div>
+    <div class="edit-sheet-header">
+      <div class="edit-sheet-title">🎬 Kelola Video</div>
+      <button class="edit-close" onclick="closeEditPanel('video-manage')">✕</button>
+    </div>
+    <div class="edit-body">
+      <div class="field-group"><label class="field-label">Judul Video</label><input class="field-input" id="v-title-input" placeholder="Judul video shorts..."></div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Emoji Thumbnail</label><input class="field-input" id="v-emoji-input" placeholder="🐟"></div>
+        <div class="field-group"><label class="field-label">Jumlah Views</label><input class="field-input" id="v-views-input" placeholder="1,2 rb"></div>
+      </div>
+      <div class="field-group"><label class="field-label">Link YouTube</label><input class="field-input" id="v-link-input" placeholder="https://youtube.com/shorts/..."></div>
+      <div class="edit-actions">
+        <button class="edit-cancel" onclick="closeEditPanel('video-manage')">Batal</button>
+        <button class="edit-save" onclick="saveVideo()">💾 Tambah Video</button>
+      </div>
+      <div class="divider"></div>
+      <div class="section-title" style="font-size:.95rem;margin-bottom:14px">📋 Video Tersimpan</div>
+      <div id="v-saved-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LEADERBOARD MANAGE -->
+<div class="edit-panel" id="ep-lb-manage">
+  <div class="edit-overlay" onclick="closeEditPanel('lb-manage')"></div>
+  <div class="edit-sheet">
+    <div class="edit-sheet-handle"></div>
+    <div class="edit-sheet-header">
+      <div class="edit-sheet-title">🏆 Kelola Leaderboard</div>
+      <button class="edit-close" onclick="closeEditPanel('lb-manage')">✕</button>
+    </div>
+    <div class="edit-body">
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Nama Pemain</label><input class="field-input" id="lb-name-input" placeholder="Username..."></div>
+        <div class="field-group"><label class="field-label">Poin</label><input class="field-input" id="lb-pts-input" type="number" placeholder="500"></div>
+      </div>
+      <div class="field-group"><label class="field-label">Emoji Avatar</label><input class="field-input" id="lb-emoji-input" placeholder="🦈"></div>
+      <div class="edit-actions">
+        <button class="edit-cancel" onclick="closeEditPanel('lb-manage')">Batal</button>
+        <button class="edit-save" onclick="addLeaderboardEntry()">➕ Tambah Pemain</button>
+      </div>
+      <div class="divider"></div>
+      <div class="section-title" style="font-size:.95rem;margin-bottom:14px">📋 Daftar Pemain</div>
+      <div id="lb-edit-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL MANAGE -->
+<div class="edit-panel" id="ep-social-manage">
+  <div class="edit-overlay" onclick="closeEditPanel('social-manage')"></div>
+  <div class="edit-sheet">
+    <div class="edit-sheet-handle"></div>
+    <div class="edit-sheet-header">
+      <div class="edit-sheet-title">🌐 Kelola Media Sosial</div>
+      <button class="edit-close" onclick="closeEditPanel('social-manage')">✕</button>
+    </div>
+    <div class="edit-body">
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Platform</label><input class="field-input" id="sc-name-input" placeholder="Instagram"></div>
+        <div class="field-group"><label class="field-label">Emoji Ikon</label><input class="field-input" id="sc-icon-input" placeholder="📸"></div>
+      </div>
+      <div class="field-group"><label class="field-label">Username / Handle</label><input class="field-input" id="sc-handle-input" placeholder="@kamuyakin26"></div>
+      <div class="field-group"><label class="field-label">Link URL</label><input class="field-input" id="sc-link-input" placeholder="https://instagram.com/..."></div>
+      <div class="field-group"><label class="field-label">Warna Aksen (hex)</label><input class="field-input" id="sc-color-input" placeholder="#E1306C"></div>
+      <div class="edit-actions">
+        <button class="edit-cancel" onclick="closeEditPanel('social-manage')">Batal</button>
+        <button class="edit-save" onclick="saveSocial()">💾 Simpan</button>
+      </div>
+      <div class="divider"></div>
+      <div class="section-title" style="font-size:.95rem;margin-bottom:14px">📋 Platform Tersimpan</div>
+      <div id="sc-saved-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT SETTINGS -->
+<div class="edit-panel" id="ep-contact-settings">
+  <div class="edit-overlay" onclick="closeEditPanel('contact-settings')"></div>
+  <div class="edit-sheet">
+    <div class="edit-sheet-handle"></div>
+    <div class="edit-sheet-header">
+      <div class="edit-sheet-title">⚙️ Pengaturan Kontak</div>
+      <button class="edit-close" onclick="closeEditPanel('contact-settings')">✕</button>
+    </div>
+    <div class="edit-body">
+      <div class="field-group"><label class="field-label">Judul Form</label><input class="field-input" id="cf-title-input" placeholder="Punya pertanyaan atau kolaborasi?"></div>
+      <div class="field-group"><label class="field-label">Email Kontak (tampil di halaman)</label><input class="field-input" id="cf-email-display" placeholder="kamuyakin@gmail.com"></div>
+      <div class="field-group"><label class="field-label">Email Tujuan (penerima form)</label><input class="field-input" id="cf-email-dest" placeholder="admin@kamuyakin.com"></div>
+      <div class="field-group"><label class="field-label">Pesan Sukses</label><textarea class="field-textarea" id="cf-success-input" placeholder="Terima kasih! Kami akan segera membalas..."></textarea></div>
+      <div class="edit-actions">
+        <button class="edit-cancel" onclick="closeEditPanel('contact-settings')">Batal</button>
+        <button class="edit-save" onclick="saveContactSettings()">💾 Simpan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+// ========================================================
+// ADMIN PASSWORD
+// ========================================================
+const ADMIN_PASSWORD = 'kamuyakin123'; // 👈 Ganti password di sini
+let isAdmin = false;
+let pendingEditId = null;
+
+function requestAdmin(editId){
+  pendingEditId = editId || null;
+  document.getElementById('pw-modal').classList.add('open');
+  document.getElementById('pw-input').value='';
+  document.getElementById('pw-error').textContent='';
+  setTimeout(()=>document.getElementById('pw-input').focus(),300);
+}
+function closePwModal(){
+  document.getElementById('pw-modal').classList.remove('open');
+  pendingEditId=null;
+}
+function submitPassword(){
+  const val=document.getElementById('pw-input').value;
+  if(val===ADMIN_PASSWORD){
+    isAdmin=true;
+    document.body.classList.add('admin-mode');
+    document.getElementById('tfn-admin-btn').style.display='none';
+    closePwModal();
+    if(pendingEditId) openEditPanel(pendingEditId);
+  } else {
+    const inp=document.getElementById('pw-input');
+    inp.classList.add('shake');
+    document.getElementById('pw-error').textContent='Password salah! Coba lagi.';
+    inp.value='';
+    setTimeout(()=>inp.classList.remove('shake'),400);
+  }
+}
+function adminLogout(){
+  isAdmin=false;
+  document.body.classList.remove('admin-mode');
+  document.getElementById('tfn-admin-btn').style.display='';
+}
+
+// ========================================================
+// DATA
+// ========================================================
+let ARTICLES = [
+  { id:1, title:"Piranha Bukan Predator Ganas Seperti di Film", tag:"🐾 Hewan", emoji:"🐟", excerpt:"Film Hollywood sering menggambarkan piranha sebagai pembunuh brutal. Tapi fakta di lapangan jauh lebih mengejutkan — piranha justru lebih sering menghindar dari manusia dan lebih sering menjadi mangsa predator lain.", yt:"https://www.youtube.com/@Kamuyakinoffcial", date:"2 Mar 2026" },
+  { id:2, title:"Kukang: Hewan Lucu yang Sebenarnya Berbisa", tag:"🐾 Hewan", emoji:"🦥", excerpt:"Video kukang viral sering bikin orang ingin memeliharanya. Tapi kukang adalah satu-satunya primata berbisa di dunia dan hewan yang sangat dilindungi. Memeliharanya adalah tindakan ilegal yang juga menyiksa hewan ini.", yt:"https://www.youtube.com/@Kamuyakinoffcial", date:"28 Feb 2026" },
+  { id:3, title:"Tempe vs Daging: Siapa Juara Protein?", tag:"🍱 Makanan", emoji:"💪", excerpt:"Tempe mengandung sekitar 19g protein per 100g — mengalahkan banyak jenis daging! Plus bebas kolesterol, kaya serat, dan punya probiotik alami hasil fermentasi. Protein nabati tempe juga sangat mudah dicerna.", yt:"https://www.youtube.com/@Kamuyakinoffcial", date:"25 Feb 2026" },
+];
+
+let QUESTIONS = [
+  { id:1, topic:"🐾 Hewan", q:"Piranha dikenal sebagai predator buas — apakah benar piranha suka menyerang manusia?", options:["Iya, selalu menyerang","Tidak, lebih sering menghindari manusia","Hanya kalau lapar","Tidak pernah menyerang"], answer:1, exp:"Piranha sebenarnya pemalu dan menghindari manusia. Mereka hanya menyerang saat terdesak atau kekurangan makanan." },
+  { id:2, topic:"🌊 Laut", q:"Hiu digambarkan sebagai pemburu manusia di banyak film. Fakta sebenarnya?", options:["Benar, hiu menarget manusia","Salah, hiu jarang menyerang manusia","Menyerang jika pakai baju merah","Semua hiu berbahaya"], answer:1, exp:"Hiu bukan predator manusia! Lebih banyak kematian akibat gigitan anjing daripada serangan hiu. Manusia bukan menu mereka." },
+  { id:3, topic:"🍱 Makanan", q:"Tahu sering dianggap tidak bergizi. Apakah ini benar?", options:["Benar, tidak bergizi","Salah, tahu kaya protein dan nutrisi","Bergizi hanya kalau digoreng","Hanya baik untuk diet"], answer:1, exp:"Tahu mengandung protein lengkap, kalsium, zat besi, dan isoflavon. Sekitar 8-9g protein per 100g — sangat bergizi!" },
+  { id:4, topic:"🌊 Laut", q:"Kraken — monster laut legenda — apakah ada inspirasinya di dunia nyata?", options:["Murni fiksi","Mungkin terinspirasi cumi-cumi raksasa yang nyata ada","Sudah punah 1000 tahun lalu","Nama ilmiah gurita besar"], answer:1, exp:"Legenda Kraken kemungkinan terinspirasi penampakan cumi-cumi raksasa (Architeuthis dux) yang bisa mencapai 13 meter!" },
+  { id:5, topic:"🌿 Alam", q:"Sisik pangolin dipercaya berkhasiat medis. Apa fakta ilmiahnya?", options:["Terbukti menyembuhkan penyakit","Terbuat dari keratin biasa, sama seperti kuku manusia","Mengandung senyawa langka","Sudah terbukti efektif"], answer:1, exp:"Sisik pangolin adalah keratin biasa, sama seperti kuku dan rambut manusia. Tidak ada bukti ilmiah khasiat medisnya!" },
+];
+
+let VIDEOS = [
+  { id:1, emoji:"🦕", title:"Godzilla Bukan Monster Purba, Tapi Keajaiban Galapagos!", views:"1,1 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
+  { id:2, emoji:"🦑", title:"Kraken isn't just a movie #youtubeshorts #fact", views:"1 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
+  { id:3, emoji:"🥚", title:"Telur Berbahaya, cek faktanya disini", views:"1,1 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
+  { id:4, emoji:"🤔", title:"Tahu GAK bikin kenyang? #youtubeshorts", views:"1,2 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
+  { id:5, emoji:"💪", title:"Protein Wars: Tempe vs Daging!", views:"1,2 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
+  { id:6, emoji:"🐟", title:"Sarden GAK SEHAT? cek faktanya", views:"1 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
+  { id:7, emoji:"🐠", title:"Lele jorok? tunggu dulu #youtubeshorts", views:"1,7 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
+  { id:8, emoji:"🦈", title:"Are sharks really human killers?", views:"1,7 rb", link:"https://www.youtube.com/@Kamuyakinoffcial" },
+];
+
+let LEADERBOARD = [
+  { name:"RafaelFaktaFan", pts:940, emoji:"🦈" },
+  { name:"ScienceGeekID", pts:885, emoji:"🌿" },
+  { name:"ZoologiKita", pts:820, emoji:"🐾" },
+  { name:"MitosBusters", pts:755, emoji:"🔍" },
+  { name:"NatureLover99", pts:710, emoji:"🌊" },
+];
+
+let SOCIALS = [
+  { name:"YouTube", icon:"▶️", handle:"@Kamuyakinoffcial", link:"https://www.youtube.com/@Kamuyakinoffcial", color:"#ff0000" },
+  { name:"Instagram", icon:"📸", handle:"@kamuuyakin26", link:"https://instagram.com/kamuuyakin26", color:"#E1306C" },
+  { name:"TikTok", icon:"🎵", handle:"@kamuyakin", link:"https://tiktok.com", color:"#000000" },
+];
+
+const DAILY_FACTS = [
+  "Cumi-cumi raksasa punya mata sebesar bola basket — terbesar di dunia hewan — untuk melihat predator di kedalaman laut yang gelap.",
+  "Kukang adalah satu-satunya primata berbisa di dunia. Gigitannya bisa menyebabkan syok anafilaksis yang berbahaya!",
+  "Tempe mengandung lebih banyak protein per 100g daripada banyak jenis daging, plus vitamin B12 yang biasanya hanya ada di produk hewani.",
+  "Piranha di habitatnya lebih sering menjadi mangsa buaya dan burung besar daripada menyerang makhluk lain.",
+  "Pangolin adalah mamalia paling banyak diperdagangkan secara ilegal di dunia, padahal sisiknya sama persis dengan kuku manusia."
+];
+
+// Quiz state
+let qQuestions=[], qIdx=0, qScore=0, qAnswered=false;
+
+// ========================================================
+// INIT
+// ========================================================
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('daily-fact').textContent = DAILY_FACTS[Math.floor(Math.random()*DAILY_FACTS.length)];
+  renderArticles(); renderQuizTopics(); renderVideos(); renderLeaderboard(); renderSocials();
+});
+
+// ========================================================
+// NAVIGATION
+// ========================================================
+function showPage(p){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tfn-btn').forEach(el=>el.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  const tfn=document.getElementById('tfn-'+p); if(tfn) tfn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ========================================================
+// EDIT PANELS
+// ========================================================
+function openEditPanel(id){
+  if(!isAdmin){ requestAdmin(id); return; }
+  const ep=document.getElementById('ep-'+id);
+  ep.classList.add('open');
+  if(id==='artikel-add') renderSavedArticlesList();
+  if(id==='quiz-manage') renderSavedQuestionsList();
+  if(id==='video-manage') renderSavedVideosList();
+  if(id==='lb-manage') renderLbEditList();
+  if(id==='social-manage') renderSavedSocialList();
+}
+function closeEditPanel(id){ document.getElementById('ep-'+id).classList.remove('open'); }
+
+// ========================================================
+// RENDER: ARTICLES
+// ========================================================
+function renderArticles(){
+  const c=document.getElementById('articles-container');
+  c.innerHTML='';
+  ARTICLES.forEach(a=>{
+    const d=document.createElement('div');
+    d.className='article-card';
+    d.innerHTML=`
+      <div class="art-meta"><span class="art-tag">${a.tag}</span><span class="art-date">${a.date||''}</span></div>
+      <div class="art-title">${a.emoji} ${a.title}</div>
+      <div class="art-excerpt">${a.excerpt}</div>
+      <div class="art-actions">
+        <a href="${a.yt||'#'}" target="_blank" class="art-read">Baca selengkapnya →</a>
+        <button class="edit-btn" onclick="editArticle(${a.id})" style="margin-left:auto">✏️ Edit</button>
+        <button class="edit-btn danger" onclick="deleteArticle(${a.id})">🗑</button>
+      </div>`;
+    c.appendChild(d);
+  });
+}
+function renderSavedArticlesList(){
+  const c=document.getElementById('art-saved-list'); c.innerHTML='';
+  ARTICLES.forEach(a=>{
+    const d=document.createElement('div');
+    d.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)';
+    d.innerHTML=`<span style="font-size:1.3rem">${a.emoji}</span><span style="flex:1;font-size:.85rem;font-weight:700">${a.title}</span><button class="edit-btn danger" onclick="deleteArticle(${a.id});renderSavedArticlesList();renderArticles()">🗑</button>`;
+    c.appendChild(d);
+  });
+}
+function saveArticle(){
+  const title=document.getElementById('art-title-input').value.trim();
+  if(!title){ alert('Judul tidak boleh kosong!'); return; }
+  const now=new Date(); const dateStr=`${now.getDate()} ${['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'][now.getMonth()]} ${now.getFullYear()}`;
+  ARTICLES.unshift({ id:Date.now(), title, tag:document.getElementById('art-tag-input').value||'📌 Umum', emoji:document.getElementById('art-emoji-input').value||'📄', excerpt:document.getElementById('art-excerpt-input').value||'', yt:document.getElementById('art-yt-input').value||'https://www.youtube.com/@Kamuyakinoffcial', date:dateStr });
+  ['art-title-input','art-tag-input','art-emoji-input','art-excerpt-input','art-yt-input'].forEach(id=>document.getElementById(id).value='');
+  renderArticles(); renderSavedArticlesList();
+}
+function editArticle(id){
+  const a=ARTICLES.find(x=>x.id===id); if(!a) return;
+  openEditPanel('artikel-add');
+  document.getElementById('art-title-input').value=a.title;
+  document.getElementById('art-tag-input').value=a.tag;
+  document.getElementById('art-emoji-input').value=a.emoji;
+  document.getElementById('art-excerpt-input').value=a.excerpt;
+  document.getElementById('art-yt-input').value=a.yt||'';
+  deleteArticle(id); renderSavedArticlesList();
+}
+function deleteArticle(id){ ARTICLES=ARTICLES.filter(a=>a.id!==id); renderArticles(); }
+
+// ========================================================
+// RENDER: QUIZ TOPICS
+// ========================================================
+function renderQuizTopics(){
+  const topics=[...new Set(QUESTIONS.map(q=>q.topic))];
+  const c=document.getElementById('quiz-topics-list'); c.innerHTML='';
+  const topicEmojis={'🐾 Hewan':'🦁','🌊 Laut':'🦈','🍱 Makanan':'🥢','🌿 Alam':'🌱'};
+  topics.forEach(t=>{
+    const count=QUESTIONS.filter(q=>q.topic===t).length;
+    const d=document.createElement('div');
+    d.className='quiz-item';
+    d.onclick=()=>startQuizByTopic(t);
+    d.innerHTML=`<div class="quiz-item-icon">${topicEmojis[t]||'❓'}</div><div class="quiz-item-info"><div class="quiz-item-title">${t}</div><div class="quiz-item-meta">${count} soal tersedia</div></div><div class="quiz-item-arrow">→</div>`;
+    c.appendChild(d);
+  });
+  // All
+  const all=document.createElement('div'); all.className='quiz-item'; all.onclick=()=>startQuizAll();
+  all.innerHTML=`<div class="quiz-item-icon">🎯</div><div class="quiz-item-info"><div class="quiz-item-title">Semua Topik (Mix)</div><div class="quiz-item-meta">${QUESTIONS.length} soal acak</div></div><div class="quiz-item-arrow">→</div>`;
+  c.appendChild(all);
+}
+function renderSavedQuestionsList(){
+  document.getElementById('q-count').textContent=QUESTIONS.length;
+  const c=document.getElementById('q-saved-list'); c.innerHTML='';
+  QUESTIONS.forEach(q=>{
+    const d=document.createElement('div');
+    d.style.cssText='display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)';
+    d.innerHTML=`<span style="flex:1;font-size:.82rem;font-weight:600;line-height:1.45">${q.topic} · ${q.q.substring(0,60)}...</span><button class="edit-btn danger" onclick="deleteQuestion(${q.id});renderSavedQuestionsList();renderQuizTopics()">🗑</button>`;
+    c.appendChild(d);
+  });
+}
+function saveQuestion(){
+  const q=document.getElementById('q-question-input').value.trim();
+  if(!q){ alert('Pertanyaan tidak boleh kosong!'); return; }
+  QUESTIONS.push({ id:Date.now(), topic:document.getElementById('q-topic-input').value||'❓ Umum', q, options:[document.getElementById('q-a-input').value,document.getElementById('q-b-input').value,document.getElementById('q-c-input').value,document.getElementById('q-d-input').value], answer:parseInt(document.getElementById('q-answer-input').value)||0, exp:document.getElementById('q-exp-input').value||'' });
+  ['q-question-input','q-topic-input','q-a-input','q-b-input','q-c-input','q-d-input','q-exp-input'].forEach(id=>document.getElementById(id).value='');
+  renderSavedQuestionsList(); renderQuizTopics();
+}
+function deleteQuestion(id){ QUESTIONS=QUESTIONS.filter(q=>q.id!==id); renderQuizTopics(); }
+
+// QUIZ PLAY
+function startQuizByTopic(t){ qQuestions=QUESTIONS.filter(q=>q.topic===t).sort(()=>Math.random()-.5).slice(0,5); startQuizPlay(); }
+function startQuizAll(){ qQuestions=[...QUESTIONS].sort(()=>Math.random()-.5).slice(0,5); startQuizPlay(); }
+function startQuizPlay(){
+  qIdx=0; qScore=0;
+  document.getElementById('quiz-list-view').style.display='none';
+  document.getElementById('quiz-play-view').style.display='block';
+  document.getElementById('quiz-result-view').style.display='none';
+  renderQ();
+}
+function backToQuizList(){
+  document.getElementById('quiz-list-view').style.display='block';
+  document.getElementById('quiz-play-view').style.display='none';
+  document.getElementById('quiz-result-view').style.display='none';
+}
+function renderQ(){
+  const q=qQuestions[qIdx]; qAnswered=false;
+  document.getElementById('qpf').style.width=((qIdx/qQuestions.length)*100)+'%';
+  document.getElementById('qct').textContent=`Soal ${qIdx+1}/${qQuestions.length}`;
+  document.getElementById('qls').textContent=qScore;
+  document.getElementById('qtt').textContent=q.topic;
+  document.getElementById('qq').textContent=q.q;
+  const opts=document.getElementById('qo'); opts.innerHTML='';
+  const letters=['A','B','C','D'];
+  q.options.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='qopt';
+    btn.innerHTML=`<span class="opt-l">${letters[i]}</span>${opt}`;
+    btn.onclick=()=>selectQ(i,q.answer,q.exp);
+    opts.appendChild(btn);
+  });
+  document.getElementById('qe').classList.remove('show');
+  document.getElementById('qnb').classList.remove('show');
+  document.getElementById('qnb').textContent=qIdx<qQuestions.length-1?'Soal Berikutnya →':'Lihat Hasil 🎉';
+}
+function selectQ(sel,correct,exp){
+  if(qAnswered) return; qAnswered=true;
+  document.querySelectorAll('.qopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===correct) b.classList.add('correct');
+    else if(i===sel&&i!==correct) b.classList.add('wrong');
+    b.querySelector('.opt-l').textContent=i===correct?'✓':(i===sel?'✗':['A','B','C','D'][i]);
+  });
+  if(sel===correct) qScore+=20;
+  document.getElementById('qet').textContent=exp;
+  document.getElementById('qe').classList.add('show');
+  document.getElementById('qls').textContent=qScore;
+  document.getElementById('qnb').classList.add('show');
+}
+function nextQ(){ qIdx++; if(qIdx>=qQuestions.length) showResult(); else renderQ(); }
+function showResult(){
+  document.getElementById('quiz-play-view').style.display='none';
+  document.getElementById('quiz-result-view').style.display='block';
+  const correct=Math.round(qScore/20), total=qQuestions.length, pct=correct/total;
+  let emoji,lbl,msg;
+  if(pct===1){emoji='🏆';lbl='SEMPURNA!';msg='Master fakta! Share dan tantang teman-temanmu.';}
+  else if(pct>=.8){emoji='🎉';lbl='Keren Banget!';msg='Hampir sempurna! Tonton lebih banyak video untuk unlock fakta seru lainnya.';}
+  else if(pct>=.6){emoji='😄';lbl='Bagus!';msg='Pengetahuanmu oke! Subscribe channel kami untuk belajar lebih banyak.';}
+  else{emoji='😅';lbl='Terus Belajar!';msg='Mitos memang mudah dipercaya! Tonton video-video kami untuk jadi lebih pintar.';}
+  document.getElementById('re').textContent=emoji;
+  document.getElementById('rs').textContent=`${correct}/${total}`;
+  document.getElementById('rl').textContent=lbl;
+  document.getElementById('rm').textContent=msg;
+}
+
+// ========================================================
+// RENDER: VIDEOS
+// ========================================================
+function renderVideos(){
+  const g=document.getElementById('video-grid'); g.innerHTML='';
+  VIDEOS.forEach(v=>{
+    const a=document.createElement('a'); a.className='vcard'; a.href=v.link||'https://www.youtube.com/@Kamuyakinoffcial'; a.target='_blank';
+    a.innerHTML=`<div class="vthumb">${v.emoji}</div><div class="vinfo"><div class="vtitle">${v.title}</div><div class="vviews">👁 ${v.views} ditonton</div></div>`;
+    g.appendChild(a);
+  });
+}
+function renderSavedVideosList(){
+  const c=document.getElementById('v-saved-list'); c.innerHTML='';
+  VIDEOS.forEach(v=>{
+    const d=document.createElement('div'); d.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)';
+    d.innerHTML=`<span style="font-size:1.4rem">${v.emoji}</span><span style="flex:1;font-size:.82rem;font-weight:700">${v.title}</span><button class="edit-btn danger" onclick="deleteVideo(${v.id});renderSavedVideosList();renderVideos()">🗑</button>`;
+    c.appendChild(d);
+  });
+}
+function saveVideo(){
+  const title=document.getElementById('v-title-input').value.trim();
+  if(!title){ alert('Judul tidak boleh kosong!'); return; }
+  VIDEOS.unshift({ id:Date.now(), title, emoji:document.getElementById('v-emoji-input').value||'🎬', views:document.getElementById('v-views-input').value||'0', link:document.getElementById('v-link-input').value||'https://www.youtube.com/@Kamuyakinoffcial' });
+  ['v-title-input','v-emoji-input','v-views-input','v-link-input'].forEach(id=>document.getElementById(id).value='');
+  renderVideos(); renderSavedVideosList();
+}
+function deleteVideo(id){ VIDEOS=VIDEOS.filter(v=>v.id!==id); renderVideos(); }
+
+// ========================================================
+// RENDER: LEADERBOARD
+// ========================================================
+function renderLeaderboard(){
+  const sorted=[...LEADERBOARD].sort((a,b)=>b.pts-a.pts);
+  const c=document.getElementById('lb-rows'); c.innerHTML='';
+  const rc=['gold','silver','bronze','',''];
+  const re=['🥇','🥈','🥉','4','5'];
+  sorted.slice(0,10).forEach((p,i)=>{
+    const d=document.createElement('div'); d.className='lb-row';
+    d.innerHTML=`<div class="lb-rank ${rc[i]||''}">${re[i]||i+1}</div><div class="lb-av">${p.emoji}</div><div class="lb-name">${p.name}</div><div class="lb-pts">${p.pts} pts</div>`;
+    c.appendChild(d);
+  });
+}
+function renderLbEditList(){
+  const c=document.getElementById('lb-edit-list'); c.innerHTML='';
+  [...LEADERBOARD].sort((a,b)=>b.pts-a.pts).forEach(p=>{
+    const d=document.createElement('div'); d.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)';
+    d.innerHTML=`<span>${p.emoji}</span><span style="flex:1;font-size:.85rem;font-weight:700">${p.name}</span><span style="font-weight:800;color:var(--accent);font-size:.85rem">${p.pts}pts</span><button class="edit-btn danger" onclick="removeLbEntry('${p.name}');renderLbEditList();renderLeaderboard()">🗑</button>`;
+    c.appendChild(d);
+  });
+}
+function addLeaderboardEntry(){
+  const name=document.getElementById('lb-name-input').value.trim();
+  if(!name){ alert('Nama tidak boleh kosong!'); return; }
+  LEADERBOARD.push({ name, pts:parseInt(document.getElementById('lb-pts-input').value)||0, emoji:document.getElementById('lb-emoji-input').value||'🎮' });
+  ['lb-name-input','lb-pts-input','lb-emoji-input'].forEach(id=>document.getElementById(id).value='');
+  renderLeaderboard(); renderLbEditList();
+}
+function removeLbEntry(name){ LEADERBOARD=LEADERBOARD.filter(p=>p.name!==name); renderLeaderboard(); }
+
+// ========================================================
+// RENDER: SOCIALS
+// ========================================================
+function renderSocials(){
+  const g=document.getElementById('social-grid'); g.innerHTML='';
+  SOCIALS.forEach(s=>{
+    const a=document.createElement('a'); a.className='social-card'; a.href=s.link||'#'; a.target='_blank';
+    a.style.setProperty('--sc-color',s.color||'var(--accent)');
+    a.innerHTML=`<span class="sc-icon">${s.icon}</span><div class="sc-name">${s.name}</div><div class="sc-handle">${s.handle}</div>`;
+    g.appendChild(a);
+  });
+}
+function renderSavedSocialList(){
+  const c=document.getElementById('sc-saved-list'); c.innerHTML='';
+  SOCIALS.forEach((s,i)=>{
+    const d=document.createElement('div'); d.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)';
+    d.innerHTML=`<span style="font-size:1.3rem">${s.icon}</span><div style="flex:1"><div style="font-size:.85rem;font-weight:800">${s.name}</div><div style="font-size:.75rem;color:var(--text-muted)">${s.handle}</div></div><button class="edit-btn danger" onclick="deleteSocial(${i});renderSavedSocialList();renderSocials()">🗑</button>`;
+    c.appendChild(d);
+  });
+}
+function saveSocial(){
+  const name=document.getElementById('sc-name-input').value.trim();
+  if(!name){ alert('Nama platform tidak boleh kosong!'); return; }
+  SOCIALS.push({ name, icon:document.getElementById('sc-icon-input').value||'🌐', handle:document.getElementById('sc-handle-input').value||'', link:document.getElementById('sc-link-input').value||'#', color:document.getElementById('sc-color-input').value||'var(--accent)' });
+  ['sc-name-input','sc-icon-input','sc-handle-input','sc-link-input','sc-color-input'].forEach(id=>document.getElementById(id).value='');
+  renderSocials(); renderSavedSocialList();
+}
+function deleteSocial(i){ SOCIALS.splice(i,1); renderSocials(); }
+
+// ========================================================
+// CONTACT FORM
+// ========================================================
+function sendContact(){
+  const name=document.getElementById('cf-name').value.trim();
+  const email=document.getElementById('cf-email').value.trim();
+  const msg=document.getElementById('cf-msg').value.trim();
+  if(!name||!email||!msg){ alert('Nama, email, dan pesan tidak boleh kosong!'); return; }
+  // Simulate send
+  ['cf-name','cf-email','cf-subject','cf-msg'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('cf-success').classList.add('show');
+  setTimeout(()=>document.getElementById('cf-success').classList.remove('show'),4000);
+}
+function saveContactSettings(){
+  const title=document.getElementById('cf-title-input').value.trim();
+  if(title) document.querySelector('.contact-form-title').textContent=title;
+  const emailDisplay=document.getElementById('cf-email-display').value.trim();
+  if(emailDisplay){
+    const el=document.getElementById('contact-email-addr');
+    el.textContent=emailDisplay;
+    el.href='mailto:'+emailDisplay;
+  }
+  const suc=document.getElementById('cf-success-input').value.trim();
+  if(suc) document.getElementById('cf-success').innerHTML='✅ '+suc;
+  closeEditPanel('contact-settings');
+}
+</script>
+</body>
+</html>
